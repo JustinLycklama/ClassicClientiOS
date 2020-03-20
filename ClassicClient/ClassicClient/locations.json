@@ -1,0 +1,20 @@
+[
+    {
+      "id" : 1,
+      "locationName": "Eaton Centre",
+      "cityName": "Toronto",
+      "address": "220 Yonge St, Toronto"
+    },
+    {
+      "id" : 2,
+      "locationName": "Yorkville Village",
+      "cityName": "Toronto",
+      "address": "55 Avenue Rd, Toronto"
+    },
+    {
+      "id" : 3,
+      "locationName": "Dufferin Mall",
+      "cityName": "Toronto",
+      "address": "900 Dufferin St, Toronto"
+    }
+]

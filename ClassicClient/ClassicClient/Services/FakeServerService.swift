@@ -9,8 +9,8 @@
 import UIKit
 
 enum Result<T> {
-    case success(results: [T])
-    case error(error: NSError)
+    case success(_ results: [T])
+    case error(_ error: NSError)
 }
 
 protocol FakeServerService: NSObject {
@@ -35,9 +35,9 @@ extension FakeServerService {
             let data = try Data(contentsOf: fileUrl)
             let results = try decoder.decode([T].self, from: data)
 
-            callback?(.success(results: results))
-        } catch {
-            callback?(.error(error: NSError.init(domain: "Failed to fetch data", code: 0, userInfo: nil)))
+            callback?(.success(results))
+        } catch (let err) {
+            callback?(.error(NSError.init(domain: "Failed to fetch data: " + err.localizedDescription, code: 0, userInfo: nil)))
         }
     }
 }
