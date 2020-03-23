@@ -1,5 +1,5 @@
 //
-//  LocationService.swift
+//  LoginService.swift
 //  ClassicClient
 //
 //  Created by Justin Lycklama on 2020-03-20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationService: NSObject, FakeServerProtocol {
-    typealias T = Location
-    let dataFileName = "locations"
+class LoginService: NSObject, FakeServerProtocol {
+    typealias T = String
+    let dataFileName = "success"
 }

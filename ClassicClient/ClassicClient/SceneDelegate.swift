@@ -8,10 +8,9 @@
 
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, LoginUpdateDelegate {
     var window: UIWindow?
-
+    var loginViewController: LoginViewController?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -19,14 +18,40 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         let contentViewController = LocationViewController()
-
+        let navController = UINavigationController(rootViewController: contentViewController)
+        
+        LoginViewModel.sharedInstance.subscribeToUpdates(delegate: self)
+        
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             
-            window.rootViewController = contentViewController
-
+            window.rootViewController = navController
+            let launch = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()!
+            
             self.window = window
             window.makeKeyAndVisible()
+            
+            // Present the launch screen to avoid any visible flashes when presenting view controller
+            window.addSubview(launch.view)
+            window.constrainSubviewToBounds(launch.view)
+            
+            loginViewController = LoginViewController()
+            loginViewController?.modalPresentationStyle = .fullScreen
+            
+            //Using DispatchQueue to prevent "Unbalanced calls to begin/end appearance transitions"
+            DispatchQueue.global().async {
+               // Bounce back to the main thread to update the UI
+               DispatchQueue.main.async {
+                self.window?.rootViewController?.present(self.loginViewController!, animated: false, completion: {
+
+                       UIView.animate(withDuration: 1.5, animations: {
+                           launch.view.alpha = 0
+                       }, completion: { (_) in
+                           launch.view.removeFromSuperview()
+                       })
+                   })
+               }
+            }
         }
     }
 
@@ -35,6 +60,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not neccessarily discarded (see `application:didDiscardSceneSessions` instead).
+        
+        LoginViewModel.sharedInstance.unsubscribeFromUpdates(delegate: self)
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
@@ -58,6 +85,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+    // MARK: LoginUpdateDelegate
+    func LoginStateUpdated(loggedIn: Bool) {
+        if loggedIn && loginViewController != nil {
+            window?.rootViewController?.dismiss(animated: true, completion: nil)
+            loginViewController = nil
+        } else if !loggedIn && loginViewController == nil {
+            presentNewLoginScreen()
+        }
+    }
+        
+    private func presentNewLoginScreen() {
+        loginViewController = LoginViewController()
+        loginViewController?.modalPresentationStyle = .fullScreen
+        loginViewController?.isModalInPresentation = true
 
+        window?.rootViewController?.present(loginViewController!, animated: false, completion: nil)
+    }
 }
 

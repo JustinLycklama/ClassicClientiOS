@@ -13,12 +13,12 @@ enum Result<T> {
     case error(_ error: NSError)
 }
 
-protocol FakeServerService: NSObject {
+protocol FakeServerProtocol: NSObject {
     associatedtype T: Decodable
     var dataFileName: String { get }
 }
 
-extension FakeServerService {
+extension FakeServerProtocol {
     func request(callback: ((Result<T>) -> Void)?) {
         fakeFetchData(withFileName: dataFileName, callback: callback)
     }
@@ -34,7 +34,7 @@ extension FakeServerService {
         do {
             let data = try Data(contentsOf: fileUrl)
             let results = try decoder.decode([T].self, from: data)
-
+                    
             callback?(.success(results))
         } catch (let err) {
             callback?(.error(NSError.init(domain: "Failed to fetch data: " + err.localizedDescription, code: 0, userInfo: nil)))
