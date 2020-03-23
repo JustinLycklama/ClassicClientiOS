@@ -8,13 +8,13 @@
 
 import UIKit
 
-class LocationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LoginUpdateDelegate {
+class CitiesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, LoginUpdateDelegate {
 
     struct Constants {
         static let DefaultCell = "defaultCell"
     }
         
-    let tableview = UITableView()
+    let tableview = UITableView.init(frame: .zero, style: .grouped)
     let loadingView = LoadingView()
     
     var citiesList: [String]?
@@ -89,5 +89,13 @@ class LocationViewController: UIViewController, UITableViewDelegate, UITableView
         cell.textLabel?.text = citiesList?[indexPath.row] ?? ""
         
         return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cityLocationsViewController = LocationsViewControler(cityName: citiesList?[indexPath.row] ?? "")
+        navigationController?.pushViewController(cityLocationsViewController, animated: true)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

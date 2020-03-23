@@ -29,7 +29,8 @@ class LoginViewController: UIViewController {
         
         titleLabel.text = "Classic Client"
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.init(name: "Avenir-Light", size: 48)
+        titleLabel.font = CCStyle.fontWithSize(size: 48, andType: .title)
+        titleLabel.textColor = CCStyle.TitleTextColor
         
         loginButton.layer.cornerRadius = 15
         loginButton.setTitle("Log In", for: .normal)
@@ -46,6 +47,7 @@ class LoginViewController: UIViewController {
         }
 
         passwordField.isSecureTextEntry = true
+        textFieldDidChange(usernameField) // TODO: remove
         
         backgroundImageView.image = #imageLiteral(resourceName: "casey-horner-CN_42yx-2Xo-unsplash")
         self.view.constrainSubviewToBounds(backgroundImageView)
@@ -68,9 +70,7 @@ class LoginViewController: UIViewController {
         }
         
         self.view.sendSubviewToBack(backgroundImageView)
-        self.view.layoutSubviews()
-        
-        self.view.backgroundColor = UIColor.white
+        self.view.layoutSubviews()        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -98,7 +98,8 @@ class LoginViewController: UIViewController {
     }
     
     @objc func textFieldDidChange(_ textfield: UITextField) {
-        setLoginButtonState(enabled: (usernameField.text?.count ?? 0 > 0) && (passwordField.text?.count ?? 0 > 0))
+        setLoginButtonState(enabled: true)
+//        setLoginButtonState(enabled: (usernameField.text?.count ?? 0 > 0) && (passwordField.text?.count ?? 0 > 0))
     }
     
 }

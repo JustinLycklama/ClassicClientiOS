@@ -8,23 +8,59 @@
 
 import UIKit
 
-class LocationItemsViewController: UIViewController {
+class LocationItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    struct Constants {
+        static let DefaultCell = "defaultCell"
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    let tableview = UITableView.init(frame: .zero, style: .plain)
+        
+    init() {
+        super.init(nibName: nil, bundle: nil)
     }
-    */
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableview.delegate = self
+        tableview.dataSource = self
+        tableview.register(UINib(nibName: "ItemTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.DefaultCell)
+                    
+        tableview.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(tableview)
+        self.view.constrainSubviewToBounds(tableview)
+        
+        tableview.reloadData()
+        
+    }
+    
+    // MARK: Tableview Datasource
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.DefaultCell, for: indexPath) as! ItemTableViewCell
+        
+//        cell.delegate = self
+//        cell.setLocation(location: cityLocations[indexPath.row])
+                
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
 }
