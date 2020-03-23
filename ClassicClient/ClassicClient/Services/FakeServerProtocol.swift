@@ -26,6 +26,7 @@ extension FakeServerProtocol {
     func fakeFetchData(withFileName filename: String, callback: ((Result<T>) -> Void)?) {
         guard let fileUrl = Bundle.main.url(forResource: filename, withExtension: "json") else {
             print("File could not be located at the given url")
+            callback?(.error(NSError.init(domain: "No such file " + filename, code: 0, userInfo: nil)))
             return
         }
 

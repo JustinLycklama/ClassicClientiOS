@@ -29,17 +29,33 @@
                             <constraint firstAttribute="width" constant="125" id="dXO-q3-ZHS"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCU-b2-cgG">
+                        <rect key="frame" x="229" y="7" width="75" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="75" id="4Dx-xO-OOi"/>
+                            <constraint firstAttribute="height" constant="30" id="CFb-iU-wlC"/>
+                        </constraints>
+                        <state key="normal" title="Button"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="QcJ-0L-zs0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="19B-z8-YAb"/>
+                    <constraint firstItem="fCU-b2-cgG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8fA-TB-BgG" secondAttribute="trailing" id="Cox-5g-rnp"/>
                     <constraint firstItem="QcJ-0L-zs0" firstAttribute="top" secondItem="8fA-TB-BgG" secondAttribute="bottom" constant="2" id="DKV-a4-y1u"/>
                     <constraint firstItem="8fA-TB-BgG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="HUX-x8-Yf2"/>
                     <constraint firstItem="8fA-TB-BgG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="O3A-qz-Qoh"/>
+                    <constraint firstItem="fCU-b2-cgG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="WjI-vh-qg5"/>
+                    <constraint firstAttribute="trailing" secondItem="fCU-b2-cgG" secondAttribute="trailing" constant="16" id="Wlg-KU-Dlk"/>
                     <constraint firstAttribute="bottom" secondItem="QcJ-0L-zs0" secondAttribute="bottom" constant="8" id="fTA-6u-dU8"/>
                     <constraint firstItem="QcJ-0L-zs0" firstAttribute="height" secondItem="8fA-TB-BgG" secondAttribute="height" id="fd8-Wf-iAE"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="editButton" destination="fCU-b2-cgG" id="dCK-dI-bPa"/>
+                <outlet property="itemName" destination="8fA-TB-BgG" id="Aiw-EC-omF"/>
+                <outlet property="twoItemDisplay" destination="QcJ-0L-zs0" id="Ine-im-EfY"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="153.34821428571428"/>
         </tableViewCell>
     </objects>

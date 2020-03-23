@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Location: Codable {
+struct Location: Codable {
     public var id: Int
     public var locationName: String
     public var cityName: String

@@ -10,15 +10,30 @@ import UIKit
 
 class ItemTableViewCell: UITableViewCell {
 
+    @IBOutlet var itemName: UILabel!
+    @IBOutlet var editButton: UIButton!
+    @IBOutlet var twoItemDisplay: TwoItemFocusDisplay!
+    
+    var item: Item?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        itemName.font = CCStyle.fontWithSize(size: 18)
+        
+        editButton.setTitle("Edit", for: .normal)
+        editButton.backgroundColor = CCStyle.accentButtonBackgroundColor
+        editButton.titleLabel?.font = CCStyle.fontWithSize(size: 18)
+        editButton.layer.cornerRadius = 8
+        editButton.setTitleColor(CCStyle.EnabledButtonTextColor, for: .normal)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func setItem(item: Item) {
+        itemName.text = item.name
+        
+        let countString = "x\(item.count)"
+        let weightString = "\(item.kgPerUnit * CGFloat(item.count)) Kg"
+        
+        twoItemDisplay.setItems(major: weightString, minor: countString)
     }
-    
 }

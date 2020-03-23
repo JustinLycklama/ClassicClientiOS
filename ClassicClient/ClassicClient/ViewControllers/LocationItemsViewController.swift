@@ -8,15 +8,19 @@
 
 import UIKit
 
-class LocationItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class LocationItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ItemUpdateDelegate {
 
     struct Constants {
         static let DefaultCell = "defaultCell"
     }
     
     let tableview = UITableView.init(frame: .zero, style: .plain)
-        
-    init() {
+    let location: Location
+    
+    var items: [Item]?
+    
+    init(forLocation location: Location) {
+        self.location = location
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -38,12 +42,25 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
         
         tableview.reloadData()
         
+        ItemViewModel.sharedInstance.getItems(forLocationId: location.id) { [weak self] (result: Result<Item>) in
+            
+            switch result {
+            case .success(let items):
+                self?.items = items
+                break
+            case .error(let err):
+                
+                break
+            }
+            
+            self?.tableview.reloadData()
+        }
     }
-    
+        
     // MARK: Tableview Datasource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return items?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -53,6 +70,9 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.DefaultCell, for: indexPath) as! ItemTableViewCell
         
+        let item = items![indexPath.row]
+        cell.setItem(item: item)
+        
 //        cell.delegate = self
 //        cell.setLocation(location: cityLocations[indexPath.row])
                 
@@ -60,7 +80,32 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = items![indexPath.row]
+        let editorVC = ItemQuantityViewController(withItem: item)
+                    
+        editorVC.delegate = self
+        
+        navigationController?.pushViewController(editorVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    // MARK: ItemUpdateDelegate
+    func itemUpdated(item: Item) {
+        CATransaction.begin()
+        CATransaction.setCompletionBlock { [weak self] () in
+            guard let self = self else {
+               return
+            }
+            
+            if let indexOfItem = self.items?.firstIndex(of: item) {
+                self.items?[indexOfItem] = item
+                
+                let indexPath = IndexPath(row: indexOfItem, section: 0)
+                self.tableview.reloadRows(at: [indexPath], with: .fade)
+            }
+        }
 
+        navigationController?.popViewController(animated: true)
+        CATransaction.commit()
+    }
 }

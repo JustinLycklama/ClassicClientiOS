@@ -31,6 +31,8 @@ struct CCStyle {
     public static let majorItemColor = ColorPalette.darkGrey
     public static let minorItemColor = ColorPalette.accentColor
         
+    public static let accentButtonBackgroundColor = ColorPalette.accentColor
+    
     public static func fontWithSize(size: CGFloat, andType type: FontType = .text) -> UIFont {
         return UIFont.init(name: type.rawValue, size: size) ?? UIFont.init()
     }

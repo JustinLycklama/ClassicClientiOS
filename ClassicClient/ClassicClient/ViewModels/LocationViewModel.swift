@@ -8,13 +8,13 @@
 
 import UIKit
 
-class LocationViewModel: NSObject {
+class LocationViewModel {
     public static let sharedInstance = LocationViewModel()
     
     private let locationService: LocationService
     private var cachedLocationMap: [String : [Location]]?
     
-    override init() {
+    init() {
         locationService = LocationService()
     }
     

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D267B5124294C2C00221DAC /* ItemQuantityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D267B4F24294C2C00221DAC /* ItemQuantityViewController.swift */; };
+		7D267B54242959BA00221DAC /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D267B53242959BA00221DAC /* Item.swift */; };
+		7D267B56242959FE00221DAC /* ItemService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D267B55242959FE00221DAC /* ItemService.swift */; };
+		7D267B5824295A1B00221DAC /* items.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D267B5724295A1B00221DAC /* items.json */; };
+		7D267B5A24295A4400221DAC /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D267B5924295A4400221DAC /* ItemViewModel.swift */; };
 		7D31F59024257858002E5CF4 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D31F58E24257858002E5CF4 /* LoginViewController.swift */; };
 		7D7410262425C9A400D75B82 /* CCStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7410252425C9A400D75B82 /* CCStyle.swift */; };
 		7D83627D2423DBF600B039E5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D83627C2423DBF600B039E5 /* AppDelegate.swift */; };
@@ -32,9 +37,15 @@
 		7DE223D02429288E00A7F286 /* TwoItemFocusDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE223CF2429288E00A7F286 /* TwoItemFocusDisplay.swift */; };
 		7DE223D32429314A00A7F286 /* ItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE223D12429314A00A7F286 /* ItemTableViewCell.swift */; };
 		7DE223D42429314A00A7F286 /* ItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DE223D22429314A00A7F286 /* ItemTableViewCell.xib */; };
+		7DE223D62429397100A7F286 /* QuantityEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE223D52429397100A7F286 /* QuantityEditorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D267B4F24294C2C00221DAC /* ItemQuantityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemQuantityViewController.swift; sourceTree = "<group>"; };
+		7D267B53242959BA00221DAC /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		7D267B55242959FE00221DAC /* ItemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemService.swift; sourceTree = "<group>"; };
+		7D267B5724295A1B00221DAC /* items.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = items.json; sourceTree = "<group>"; };
+		7D267B5924295A4400221DAC /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		7D31F58E24257858002E5CF4 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7D7410252425C9A400D75B82 /* CCStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCStyle.swift; sourceTree = "<group>"; };
 		7D8362792423DBF600B039E5 /* ClassicClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClassicClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +73,7 @@
 		7DE223CF2429288E00A7F286 /* TwoItemFocusDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoItemFocusDisplay.swift; sourceTree = "<group>"; };
 		7DE223D12429314A00A7F286 /* ItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemTableViewCell.swift; sourceTree = "<group>"; };
 		7DE223D22429314A00A7F286 /* ItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemTableViewCell.xib; sourceTree = "<group>"; };
+		7DE223D52429397100A7F286 /* QuantityEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityEditorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +137,7 @@
 				7D8362932423E21800B039E5 /* LocationItemsViewController.swift */,
 				7D31F58E24257858002E5CF4 /* LoginViewController.swift */,
 				7DE223C9242906B500A7F286 /* LocationsViewControler.swift */,
+				7D267B4F24294C2C00221DAC /* ItemQuantityViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -134,6 +147,7 @@
 			children = (
 				7DBC8BB92425429A000B0CE6 /* LocationViewModel.swift */,
 				7DD319FA2425B1DD00D2A4EA /* LoginViewModel.swift */,
+				7D267B5924295A4400221DAC /* ItemViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -150,6 +164,7 @@
 		7D8362972423E5F700B039E5 /* Generic */ = {
 			isa = PBXGroup;
 			children = (
+				7DE223D52429397100A7F286 /* QuantityEditorView.swift */,
 				7D8362992423E62200B039E5 /* LoadingView.swift */,
 				7DBC8BBB242569C3000B0CE6 /* UIViewExtension.swift */,
 				7D7410252425C9A400D75B82 /* CCStyle.swift */,
@@ -175,6 +190,7 @@
 				7DBC8BB22425390E000B0CE6 /* LocationService.swift */,
 				7DBC8BB424253941000B0CE6 /* FakeServerProtocol.swift */,
 				7DD31A012425B94C00D2A4EA /* LoginService.swift */,
+				7D267B55242959FE00221DAC /* ItemService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -183,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				7DBC8BB724253A6F000B0CE6 /* Location.swift */,
+				7D267B53242959BA00221DAC /* Item.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -192,6 +209,7 @@
 			children = (
 				7DBC8BBD24256B72000B0CE6 /* locations.json */,
 				7DD31A032425B95E00D2A4EA /* success.json */,
+				7D267B5724295A1B00221DAC /* items.json */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -258,6 +276,7 @@
 				7DE223CE24290AA900A7F286 /* CityLocationTableViewCell.xib in Resources */,
 				7D8362892423DBFE00B039E5 /* LaunchScreen.storyboard in Resources */,
 				7D8362862423DBFE00B039E5 /* Preview Assets.xcassets in Resources */,
+				7D267B5824295A1B00221DAC /* items.json in Resources */,
 				7DBC8BBE24256B72000B0CE6 /* locations.json in Resources */,
 				7DE223D42429314A00A7F286 /* ItemTableViewCell.xib in Resources */,
 				7D8362832423DBFE00B039E5 /* Assets.xcassets in Resources */,
@@ -275,7 +294,10 @@
 				7DBC8BB32425390E000B0CE6 /* LocationService.swift in Sources */,
 				7DE223CA242906B500A7F286 /* LocationsViewControler.swift in Sources */,
 				7DBC8BB524253941000B0CE6 /* FakeServerProtocol.swift in Sources */,
+				7D267B54242959BA00221DAC /* Item.swift in Sources */,
 				7DBC8BBC242569C3000B0CE6 /* UIViewExtension.swift in Sources */,
+				7D267B56242959FE00221DAC /* ItemService.swift in Sources */,
+				7D267B5A24295A4400221DAC /* ItemViewModel.swift in Sources */,
 				7D8362942423E21800B039E5 /* LocationItemsViewController.swift in Sources */,
 				7DBC8BBA2425429A000B0CE6 /* LocationViewModel.swift in Sources */,
 				7D83627D2423DBF600B039E5 /* AppDelegate.swift in Sources */,
@@ -283,9 +305,11 @@
 				7DBC8BB824253A6F000B0CE6 /* Location.swift in Sources */,
 				7DE223D32429314A00A7F286 /* ItemTableViewCell.swift in Sources */,
 				7DD319FB2425B1DD00D2A4EA /* LoginViewModel.swift in Sources */,
+				7DE223D62429397100A7F286 /* QuantityEditorView.swift in Sources */,
 				7D83627F2423DBF600B039E5 /* SceneDelegate.swift in Sources */,
 				7D8362922423E1B800B039E5 /* CitiesViewController.swift in Sources */,
 				7D83629A2423E62200B039E5 /* LoadingView.swift in Sources */,
+				7D267B5124294C2C00221DAC /* ItemQuantityViewController.swift in Sources */,
 				7DD31A022425B94C00D2A4EA /* LoginService.swift in Sources */,
 				7D7410262425C9A400D75B82 /* CCStyle.swift in Sources */,
 				7DE223CD24290AA900A7F286 /* CityLocationTableViewCell.swift in Sources */,
