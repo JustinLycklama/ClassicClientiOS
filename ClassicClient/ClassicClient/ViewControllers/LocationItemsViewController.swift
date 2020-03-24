@@ -109,31 +109,26 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
     
     // MARK: ItemUpdateDelegate
     func itemUpdated(item: Item) {
-        
-        var completion: (() -> Void)?
-        
-        if let indexOfItem = self.items?.firstIndex(of: item) {
-            
-            let indexPath = IndexPath(row: indexOfItem, section: 0)
-            
-            completion = { [weak self] () in
-                guard let self = self else {
-                   return
-                }
-                
-                self.items?[indexOfItem] = item
-                
-                self.tableview.reloadRows(at: [indexPath], with: .fade)
-                self.tableview.deselectRow(at: indexPath, animated: true)
-            }
-                     
-            CATransaction.begin()
-            CATransaction.setCompletionBlock(completion)
 
-            navigationController?.popViewController(animated: true)
-            self.tableview.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
-            
-            CATransaction.commit()
+        navigationController?.popViewController(animated: true)
+        
+        guard let indexOfItem = self.items?.firstIndex(of: item),
+        let coordinator = transitionCoordinator else {
+            return
+        }
+        
+        let indexPath = IndexPath(row: indexOfItem, section: 0)
+        tableview.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
+        
+        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+            guard let self = self else {
+               return
+            }
+
+            self.items?[indexOfItem] = item
+
+            self.tableview.reloadRows(at: [indexPath], with: .fade)
+            self.tableview.deselectRow(at: indexPath, animated: true)
             
         }
     }

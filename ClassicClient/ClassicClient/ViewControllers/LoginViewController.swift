@@ -44,6 +44,7 @@ class LoginViewController: UIViewController {
             textfield.layer.borderWidth = 1
             textfield.layer.borderColor = UIColor.black.cgColor
             textfield.tintColor = UIColor.darkGray
+            textfield.textColor = CCStyle.TitleTextColor
 
             textfield.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)            
         }
@@ -95,8 +96,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc func textFieldDidChange(_ textfield: UITextField) {
-        setLoginButtonState(enabled: true)
-//        setLoginButtonState(enabled: (usernameField.text?.count ?? 0 > 0) && (passwordField.text?.count ?? 0 > 0))
+        setLoginButtonState(enabled: (usernameField.text?.count ?? 0 > 0) && (passwordField.text?.count ?? 0 > 0))
     }
     
 }
