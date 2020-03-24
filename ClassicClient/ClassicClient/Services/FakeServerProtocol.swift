@@ -32,13 +32,15 @@ extension FakeServerProtocol {
 
         let decoder = JSONDecoder()
         
-        do {
-            let data = try Data(contentsOf: fileUrl)
-            let results = try decoder.decode([T].self, from: data)
-                    
-            callback?(.success(results))
-        } catch (let err) {
-            callback?(.error(NSError.init(domain: "Failed to fetch data: " + err.localizedDescription, code: 0, userInfo: nil)))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            do {
+                let data = try Data(contentsOf: fileUrl)
+                let results = try decoder.decode([T].self, from: data)
+                        
+                callback?(.success(results))
+            } catch (let err) {
+                callback?(.error(NSError.init(domain: "Failed to fetch data: " + err.localizedDescription, code: 0, userInfo: nil)))
+            }
         }
     }
 }

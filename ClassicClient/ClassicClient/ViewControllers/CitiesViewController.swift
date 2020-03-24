@@ -34,10 +34,9 @@ class CitiesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableview.register(UITableViewCell.self, forCellReuseIdentifier: Constants.DefaultCell)
         
         tableview.translatesAutoresizingMaskIntoConstraints = false
-        loadingView.translatesAutoresizingMaskIntoConstraints = false
+        loadingView.view.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(tableview)
-        self.view.addSubview(loadingView)
         
         self.view.constrainSubviewToBounds(tableview)
         
@@ -47,8 +46,13 @@ class CitiesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let barButton = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logout))
         navigationItem.setLeftBarButton(barButton, animated: false)
+        
+        self.addChild(loadingView)
+        self.view.addSubview(loadingView.view)
+        self.view.constrainSubviewToBounds(loadingView.view)
+        self.view.bringSubviewToFront(loadingView.view)
     }
-
+    
     deinit {
         LoginViewModel.sharedInstance.unsubscribeFromUpdates(delegate: self)
     }
@@ -56,23 +60,27 @@ class CitiesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: LoginUpdateDelegate
     func LoginStateUpdated(loggedIn: Bool) {
         guard loggedIn else {
+            loadingView.setLoading(false)
             return
         }
         
+        loadingView.setLoading(true)
         LocationViewModel.sharedInstance.getCityList { [weak self] (result: Result<String>) in
+            self?.loadingView.setLoading(false)
             switch result {
             case .success(let results):
                 self?.citiesList = results
                 self?.tableview.reloadData()
                 break
             case .error(let error):
-                
+                self?.loadingView.setError(error: error)
                 break
             }
         }
     }
     
     @objc func logout() {
+        loadingView.setLoading(true)
         LoginViewModel.sharedInstance.logout()
     }
     

@@ -15,6 +15,8 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     let tableview = UITableView.init(frame: .zero, style: .plain)
+    let loadingView = LoadingView()
+    
     let location: Location
     
     var items: [Item]?
@@ -47,21 +49,27 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
         let barButton = UIBarButtonItem(title: "Sign", style: .plain, target: self, action: #selector(sign))
         navigationItem.setRightBarButton(barButton, animated: false)
         
+        self.addChild(loadingView)
+        self.view.addSubview(loadingView.view)
+        self.view.constrainSubviewToBounds(loadingView.view)
+        self.view.bringSubviewToFront(loadingView.view)
+        
+        loadingView.setLoading(true)
         ItemViewModel.sharedInstance.getItems(forLocationId: location.id) { [weak self] (result: Result<Item>) in
-            
+            self?.loadingView.setLoading(false)
             switch result {
             case .success(let items):
                 self?.items = items
                 break
             case .error(let err):
-                
+                self?.loadingView.setError(error: err)
                 break
             }
             
             self?.tableview.reloadData()
         }
     }
-        
+    
     @objc func sign() {
         let signatureVC = SignatureViewController()
         signatureVC.modalPresentationStyle = .fullScreen

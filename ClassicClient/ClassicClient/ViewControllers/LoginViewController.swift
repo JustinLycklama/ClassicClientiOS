@@ -17,6 +17,8 @@ class LoginViewController: UIViewController {
     let passwordField = UITextField()
     let loginButton = UIButton()
 
+    let loadingView = LoadingView()
+    
     let backgroundImageView = UIImageView()
     
     override func viewDidLoad() {
@@ -70,24 +72,19 @@ class LoginViewController: UIViewController {
         }
         
         self.view.sendSubviewToBack(backgroundImageView)
-        self.view.layoutSubviews()        
+        
+        self.view.addSubview(loadingView.view)
+        self.addChild(loadingView)
+        self.view.constrainSubviewToBounds(loadingView.view)
+        self.view.bringSubviewToFront(loadingView.view)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
+           
     @objc func login() {
+        loadingView.setLoading(true)
         LoginViewModel.sharedInstance.login()
     }
     
