@@ -71,22 +71,27 @@ class LocationsViewControler: UIViewController, UITableViewDelegate, UITableView
     
     // MARK: LocationMapSelectionDelegate
     func presentMapForLocation(location: Location) {
-        
-//        UIApplication.shared.openURL(URL(string:"https://www.google.com/maps/@42.585444,13.007813,6z")!)
-        let coordinate = CLLocationCoordinate2DMake(42.585444,13.007813)
-        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
-        mapItem.name = "Target location"
-        mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
-        
-//        //Working in Swift new versions.
-//        if
-//            let url = URL(string: "https://www.google.com/maps/search/?api=1")
-//        {
-//            //UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)
-//            UIApplication.shared.open(url)
-//        } else
-//        {
-//            NSLog("Can't use com.google.maps://");
-//        }
+                        
+        // Google maps cannot be opened in the simulator
+        #if !targetEnvironment(simulator)
+            let address = "?saddr=?daddr=\(location.address.replacingOccurrences(of: " ", with: "+"))&directionsmode=driving"
+            let fullAddr = "comgooglemaps://\(address)"
+            
+            if let url = URL(string: fullAddr), UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            } else
+            {
+                NSLog("Can't use: \(fullAddr)");
+            }
+            
+            // Apple Maps
+            /*
+                UIApplication.shared.openURL(URL(string:"https://www.google.com/maps/@42.585444,13.007813,6z")!)
+                let coordinate = CLLocationCoordinate2DMake(42.585444,13.007813)
+                let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: coordinate, addressDictionary:nil))
+                mapItem.name = "Target location"
+                mapItem.openInMaps(launchOptions: [MKLaunchOptionsDirectionsModeKey : MKLaunchOptionsDirectionsModeDriving])
+             */
+        #endif
     }
 }

@@ -28,7 +28,12 @@ class CityLocationTableViewCell: UITableViewCell {
         nameLabel.font = CCStyle.fontWithSize(size: 18)
         addressLabel.font = CCStyle.fontWithSize(size: 14)
         
+        
+        mapButton.layer.cornerRadius = 8
+        mapButton.titleLabel?.font = CCStyle.fontWithSize(size: 18)
+        mapButton.setTitleColor(CCStyle.EnabledButtonTextColor, for: .normal)
         mapButton.addTarget(self, action: #selector(mapButtonPress), for: .touchUpInside)
+        mapButton.backgroundColor = CCStyle.accentButtonBackgroundColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
