@@ -35,6 +35,9 @@ class ItemQuantityViewController: UIViewController, QuantityEditorDelegate {
         super.viewDidLoad()
 
         edgesForExtendedLayout = []
+        navigationController?.navigationBar.isTranslucent = false
+        
+        title = "Edit Item"
         
         for view in [itemNameHeader, quantityLabel, quantityEditor] {             
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +47,7 @@ class ItemQuantityViewController: UIViewController, QuantityEditorDelegate {
         quantityLabel.text = "Quantity:"
         quantityLabel.font = CCStyle.fontWithSize(size: 13)
         
-        itemNameHeader.text = "Some Item"
+        itemNameHeader.text = item.name
         itemNameHeader.font = CCStyle.fontWithSize(size: 18, andType: .title)
         
         quantityEditor.delegate = self
@@ -64,7 +67,8 @@ class ItemQuantityViewController: UIViewController, QuantityEditorDelegate {
         
         self.view.backgroundColor = .white
         
-        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(save))
+        let barButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(save))
+        navigationItem.setRightBarButton(barButton, animated: false)
     }
         
     @objc func save() {

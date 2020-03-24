@@ -27,6 +27,8 @@ class CitiesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Cities"
+        
         tableview.delegate = self
         tableview.dataSource = self
         tableview.register(UITableViewCell.self, forCellReuseIdentifier: Constants.DefaultCell)
@@ -42,22 +44,15 @@ class CitiesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableview.reloadData()
         
         LoginViewModel.sharedInstance.subscribeToUpdates(delegate: self)
+        
+        let barButton = UIBarButtonItem(title: "Log Out", style: .plain, target: self, action: #selector(logout))
+        navigationItem.setLeftBarButton(barButton, animated: false)
     }
 
     deinit {
         LoginViewModel.sharedInstance.unsubscribeFromUpdates(delegate: self)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
     // MARK: LoginUpdateDelegate
     func LoginStateUpdated(loggedIn: Bool) {
         guard loggedIn else {
@@ -77,6 +72,10 @@ class CitiesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    @objc func logout() {
+        LoginViewModel.sharedInstance.logout()
+    }
+    
     // MARK: Tableview Datasource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -87,6 +86,7 @@ class CitiesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: Constants.DefaultCell, for: indexPath)
         
         cell.textLabel?.text = citiesList?[indexPath.row] ?? ""
+        cell.textLabel?.font = CCStyle.fontWithSize(size: 18)
         
         return cell
     }

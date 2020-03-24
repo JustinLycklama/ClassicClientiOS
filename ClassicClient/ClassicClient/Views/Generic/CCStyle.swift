@@ -19,6 +19,8 @@ struct ColorPalette {
     fileprivate static let white = UIColor.white
     fileprivate static let lightGrey = UIColor.lightGray
     fileprivate static let accentColor = UIColor(rgb: 0x0bbaba)
+    fileprivate static let continueColor = UIColor(rgb: 0x04b355)
+    fileprivate static let stopColor = UIColor(rgb: 0xcf5408)
 }
 
 struct CCStyle {
@@ -30,7 +32,9 @@ struct CCStyle {
 
     public static let majorItemColor = ColorPalette.darkGrey
     public static let minorItemColor = ColorPalette.accentColor
-        
+    
+    public static let acceptButtonBackgroundColor = ColorPalette.continueColor
+    public static let cancelButtonBackgroundColor = ColorPalette.stopColor
     public static let accentButtonBackgroundColor = ColorPalette.accentColor
     
     public static func fontWithSize(size: CGFloat, andType type: FontType = .text) -> UIFont {

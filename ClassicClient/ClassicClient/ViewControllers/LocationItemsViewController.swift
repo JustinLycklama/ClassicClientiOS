@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LocationItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ItemUpdateDelegate {
+class LocationItemsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ItemUpdateDelegate, SignatureDelegate {
 
     struct Constants {
         static let DefaultCell = "defaultCell"
@@ -31,6 +31,8 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Order Items"
+        
         tableview.delegate = self
         tableview.dataSource = self
         tableview.register(UINib(nibName: "ItemTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.DefaultCell)
@@ -41,6 +43,9 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
         self.view.constrainSubviewToBounds(tableview)
         
         tableview.reloadData()
+        
+        let barButton = UIBarButtonItem(title: "Sign", style: .plain, target: self, action: #selector(sign))
+        navigationItem.setRightBarButton(barButton, animated: false)
         
         ItemViewModel.sharedInstance.getItems(forLocationId: location.id) { [weak self] (result: Result<Item>) in
             
@@ -57,6 +62,14 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
         }
     }
         
+    @objc func sign() {
+        let signatureVC = SignatureViewController()
+        signatureVC.modalPresentationStyle = .fullScreen
+        signatureVC.delegate = self
+        
+        navigationController?.present(signatureVC, animated: true, completion: nil)
+    }
+    
     // MARK: Tableview Datasource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,9 +85,6 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
         
         let item = items![indexPath.row]
         cell.setItem(item: item)
-        
-//        cell.delegate = self
-//        cell.setLocation(location: cityLocations[indexPath.row])
                 
         return cell
     }
@@ -91,21 +101,42 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
     
     // MARK: ItemUpdateDelegate
     func itemUpdated(item: Item) {
-        CATransaction.begin()
-        CATransaction.setCompletionBlock { [weak self] () in
-            guard let self = self else {
-               return
-            }
+        
+        var completion: (() -> Void)?
+        
+        if let indexOfItem = self.items?.firstIndex(of: item) {
             
-            if let indexOfItem = self.items?.firstIndex(of: item) {
+            let indexPath = IndexPath(row: indexOfItem, section: 0)
+            
+            completion = { [weak self] () in
+                guard let self = self else {
+                   return
+                }
+                
                 self.items?[indexOfItem] = item
                 
-                let indexPath = IndexPath(row: indexOfItem, section: 0)
                 self.tableview.reloadRows(at: [indexPath], with: .fade)
+                self.tableview.deselectRow(at: indexPath, animated: true)
             }
-        }
+                     
+            CATransaction.begin()
+            CATransaction.setCompletionBlock(completion)
 
-        navigationController?.popViewController(animated: true)
-        CATransaction.commit()
+            navigationController?.popViewController(animated: true)
+            self.tableview.selectRow(at: indexPath, animated: false, scrollPosition: .middle)
+            
+            CATransaction.commit()
+            
+        }
+    }
+    
+    // MARK: SignatureDelegate
+    func save() {
+        // Saving doesn't do anything yet
+        navigationController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func cancel() {
+        navigationController?.dismiss(animated: true, completion: nil)
     }
 }

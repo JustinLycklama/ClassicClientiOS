@@ -100,7 +100,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, LoginUpdateDelegate {
         loginViewController?.modalPresentationStyle = .fullScreen
         loginViewController?.isModalInPresentation = true
 
-        window?.rootViewController?.present(loginViewController!, animated: false, completion: nil)
+        window?.rootViewController?.present(loginViewController!, animated: true, completion: nil)
     }
 }
 

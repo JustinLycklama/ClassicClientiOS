@@ -31,6 +31,8 @@ class LocationsViewControler: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Addresses"
+        
         tableview.delegate = self
         tableview.dataSource = self
         tableview.register(UINib(nibName: "CityLocationTableViewCell", bundle: nil), forCellReuseIdentifier: Constants.DefaultCell)

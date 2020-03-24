@@ -26,6 +26,7 @@ class ItemTableViewCell: UITableViewCell {
         editButton.titleLabel?.font = CCStyle.fontWithSize(size: 18)
         editButton.layer.cornerRadius = 8
         editButton.setTitleColor(CCStyle.EnabledButtonTextColor, for: .normal)
+        editButton.isUserInteractionEnabled = false
     }
 
     func setItem(item: Item) {
