@@ -19,6 +19,8 @@ class ItemTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        self.addBorder(edges: .all)
+        
         itemName.font = CCStyle.fontWithSize(size: 18)
         
         editButton.setTitle("Edit", for: .normal)

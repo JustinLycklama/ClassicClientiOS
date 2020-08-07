@@ -14,6 +14,8 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
         static let DefaultCell = "defaultCell"
     }
     
+    private let transition = VHPresentFromViewTransition()
+    
     let tableview = UITableView.init(frame: .zero, style: .plain)
     let loadingView = LoadingView()
     
@@ -103,7 +105,23 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
                     
         editorVC.delegate = self
         
-        navigationController?.pushViewController(editorVC, animated: true)
+//        navigationController?.pushViewController(editorVC, animated: true)
+        
+        let navCont = UINavigationController(rootViewController: editorVC)
+        navCont.modalPresentationStyle = .overCurrentContext
+        navCont.transitioningDelegate = self
+        
+        editorVC.navigationItem.setLeftBarButton(UIBarButtonItem.init(title: "Close",
+                                                                style: .plain,
+                                                                target: self,
+                                                                action: #selector(LocationItemsViewController.cancel)),
+                                           animated: true)
+        
+        transition.fromView = self.tableview.cellForRow(at: indexPath)
+        transition.viewContainer = self.tableview
+        
+        self.navigationController?.present(navCont, animated: true, completion: nil)
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -139,7 +157,20 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
         navigationController?.dismiss(animated: true, completion: nil)
     }
     
-    func cancel() {
+    @objc func cancel() {
         navigationController?.dismiss(animated: true, completion: nil)
+    }
+}
+
+
+extension LocationItemsViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.presenting = true
+        return transition
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transition.presenting = false
+        return transition
     }
 }

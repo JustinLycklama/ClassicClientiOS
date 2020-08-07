@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
         titleLabel.textAlignment = .center
         titleLabel.font = CCStyle.fontWithSize(size: 48, andType: .title)
         titleLabel.textColor = CCStyle.TitleTextColor
-        
+                
         loginButton.layer.cornerRadius = 15
         loginButton.setTitle("Log In", for: .normal)
         loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
@@ -55,29 +55,29 @@ class LoginViewController: UIViewController {
         backgroundImageView.image = #imageLiteral(resourceName: "casey-horner-CN_42yx-2Xo-unsplash")
         self.view.constrainSubviewToBounds(backgroundImageView)
                 
-        let views = ["title": titleLabel, "username": usernameField, "password": passwordField, "login": loginButton]
-        let verticalMetrics = ["paddingTop": 100, "paddingGrouped": 24, "paddingSeperation": 48]
-        let horizontalMetrics = ["padding": 28]
-        
-        let verticalConstraints = NSLayoutConstraint.constraints(withVisualFormat:
-            "V:|-(paddingTop)-[title(75)]-(paddingSeperation)-[username(50)]-(paddingGrouped)-[password(50)]-(paddingSeperation)-[login(50)]",
-                                                                 options: .alignAllCenterX, metrics: verticalMetrics, views: views)
-        
-        let titleHor = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(padding)-[title]-(padding)-|", options: .alignAllCenterY, metrics: horizontalMetrics, views: views)
-        let userHor = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(padding)-[username]-(padding)-|", options: .alignAllCenterY, metrics: horizontalMetrics, views: views)
-        let passHor = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(padding)-[password]-(padding)-|", options: .alignAllCenterY, metrics: horizontalMetrics, views: views)
-        let loginHor = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(padding)-[login]-(padding)-|", options: .alignAllCenterY, metrics: horizontalMetrics, views: views)
-        
-        for constraint in [verticalConstraints, titleHor, userHor, passHor, loginHor] {
-            self.view.addConstraints(constraint)
-        }
-        
         self.view.sendSubviewToBack(backgroundImageView)
         
         self.view.addSubview(loadingView.view)
         self.addChild(loadingView)
         self.view.constrainSubviewToBounds(loadingView.view)
         self.view.bringSubviewToFront(loadingView.view)
+        
+        let views = ["title" : titleLabel, "username" : usernameField, "password" : passwordField, "login" : loginButton]
+        
+        let center = NSLayoutConstraint.init(item: titleLabel, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1, constant: 0)
+        
+        let verticalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(25)-[title]-(25)-[username(44)]-(25)-[password(44)]-(25)-[login(44)]", options: .alignAllCenterX, metrics: nil, views: views)
+        
+        let userHor = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(25)-[username]-(25)-|", options: .alignAllCenterX, metrics: nil, views: views)
+        let passHor = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(25)-[password]-(25)-|", options: .alignAllCenterX, metrics: nil, views: views)
+        let loginHor = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(25)-[login]-(25)-|", options: .alignAllCenterX, metrics: nil, views: views)
+        
+        self.view.addConstraint(center)
+        self.view.addConstraints(verticalConstraint)
+        
+        self.view.addConstraints(userHor)
+        self.view.addConstraints(passHor)
+        self.view.addConstraints(loginHor)
     }
 
     override func viewWillAppear(_ animated: Bool) {
