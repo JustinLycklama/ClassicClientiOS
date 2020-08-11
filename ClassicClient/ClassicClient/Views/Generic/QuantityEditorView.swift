@@ -8,19 +8,19 @@
 
 import UIKit
 
-protocol QuantityEditorDelegate {
+public protocol QuantityEditorDelegate {
     func minusPressed(onEditor: QuantityEditorView)
     func plusPressed(onEditor: QuantityEditorView)
 }
 
-class QuantityEditorView: UIView {
+public class QuantityEditorView: UIView {
 
     let minusButton = UIButton()
     let plusButton = UIButton()
     
     let textArea = UILabel()
     
-    var delegate: QuantityEditorDelegate?
+    public var delegate: QuantityEditorDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,7 +69,7 @@ class QuantityEditorView: UIView {
         addBorder(edges: .all , color: .black, thickness: 1)        
     }
     
-    func setValue(value: Int) {
+    public func setValue(value: Int) {
         textArea.text = String(value)
     }
     

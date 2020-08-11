@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DrawingView: UIView {
+public class DrawingView: UIView {
 
     let mainImageView = UIImageView()
     let tempImageView = UIImageView()
@@ -32,7 +32,7 @@ class DrawingView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func clear() {
+    public func clear() {
         mainImageView.image = nil
         tempImageView.image = nil
     }
@@ -42,7 +42,7 @@ class DrawingView: UIView {
      https://www.raywenderlich.com/5895-uikit-drawing-tutorial-how-to-make-a-simple-drawing-app
      */
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
       guard let touch = touches.first else {
         return
       }
@@ -77,7 +77,7 @@ class DrawingView: UIView {
       UIGraphicsEndImageContext()
     }
 
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
       guard let touch = touches.first else {
         return
       }
@@ -91,7 +91,7 @@ class DrawingView: UIView {
       lastPoint = currentPoint
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
       if !swiped {
         // draw a single point
         drawLine(from: lastPoint, to: lastPoint)

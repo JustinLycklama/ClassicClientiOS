@@ -8,17 +8,17 @@
 
 import UIKit
 
-enum Result<T> {
+public enum Result<T> {
     case success(_ results: [T])
     case error(_ error: NSError)
 }
 
-protocol FakeServerProtocol: NSObject {
+public protocol FakeServerProtocol: NSObject {
     associatedtype T: Decodable
     var dataFileName: String { get }
 }
 
-extension FakeServerProtocol {
+public extension FakeServerProtocol {
     func request(callback: ((Result<T>) -> Void)?) {
         fakeFetchData(withFileName: dataFileName, callback: callback)
     }

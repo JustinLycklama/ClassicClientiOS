@@ -1,0 +1,16 @@
+PODS:
+  - ClassicClient (0.1.0)
+
+DEPENDENCIES:
+  - ClassicClient (from `../`)
+
+EXTERNAL SOURCES:
+  ClassicClient:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ClassicClient: bad76fa9bdbc35ff09860c8a59abc05116bd9bea
+
+PODFILE CHECKSUM: e82a0a94a19d863f1b259ae247e9b5e73f478d80
+
+COCOAPODS: 1.9.3

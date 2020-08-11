@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoadingView: UIViewController {
+public class LoadingView: UIViewController {
     
     private let kRotationAnimationKey = "rotationanimationkey"
     
@@ -16,7 +16,7 @@ class LoadingView: UIViewController {
     let iconView = UIImageView()
     let touchBlocker = UIView()
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         
         
@@ -24,8 +24,8 @@ class LoadingView: UIViewController {
             view.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(view)
         }
-        
-        loadingIcon.image = #imageLiteral(resourceName: "loading")
+
+        loadingIcon.image = UIImage(named: "loadingIcon", in: Bundle(for: type(of:self)), compatibleWith: nil)
         loadingIcon.translatesAutoresizingMaskIntoConstraints = false
         
         iconView.addSubview(loadingIcon)
@@ -48,7 +48,7 @@ class LoadingView: UIViewController {
         setLoading(false)
     }
      
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
                         
         if iconView.layer.animation(forKey: kRotationAnimationKey) == nil {
@@ -67,13 +67,13 @@ class LoadingView: UIViewController {
         loadingIcon.layer.removeAllAnimations()
     }
     
-    func setLoading(_ loading: Bool) {
+    public func setLoading(_ loading: Bool) {
         UIView.animate(withDuration: 0.25) {
             self.view.alpha = loading ? 1 : 0
         }
     }
     
-    func setError(error: NSError) {
+    public func setError(error: NSError) {
         // Here I would be hiding the spinner and displaying some message for the user
     }
 }

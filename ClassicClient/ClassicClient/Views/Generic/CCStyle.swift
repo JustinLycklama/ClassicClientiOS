@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum FontType: String {
+public enum FontType: String {
     case title = "Avenir-Heavy"
     case text = "Avenir-Light"
 }
@@ -23,7 +23,7 @@ struct ColorPalette {
     fileprivate static let stopColor = UIColor(rgb: 0xcf5408)
 }
 
-struct CCStyle {
+public struct CCStyle {
     public static let TitleTextColor = ColorPalette.white
     public static let EnabledButtonBackgroundColor = ColorPalette.darkGrey
     public static let DisabledButtonBackgroundColor = ColorPalette.darkGreyAlpha

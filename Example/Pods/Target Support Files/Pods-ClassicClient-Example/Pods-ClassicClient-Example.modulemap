@@ -1,0 +1,6 @@
+framework module Pods_ClassicClient_Example {
+  umbrella header "Pods-ClassicClient-Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension UIView {
+public extension UIView {
     func constrainSubviewToBounds(_ subview: UIView, withInset inset: UIEdgeInsets = UIEdgeInsets.zero) {
         // subview must be a subview of our cell to be constrained
         if self.subviews.contains(subview) == false {

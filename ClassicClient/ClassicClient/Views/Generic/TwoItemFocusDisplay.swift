@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TwoItemFocusDisplay: UIView {
+public class TwoItemFocusDisplay: UIView {
 
     let majorLabel = UILabel()
     let minorLabel = UILabel()
@@ -76,7 +76,7 @@ class TwoItemFocusDisplay: UIView {
         self.backgroundColor = CCStyle.minorItemColor
     }
     
-    func setItems(major: String, minor: String) {
+    public func setItems(major: String, minor: String) {
         majorLabel.text = major
         minorLabel.text = minor
     }

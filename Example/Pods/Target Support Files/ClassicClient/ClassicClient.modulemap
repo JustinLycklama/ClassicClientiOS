@@ -1,0 +1,6 @@
+framework module ClassicClient {
+  umbrella header "ClassicClient-umbrella.h"
+
+  export *
+  module * { export * }
+}
