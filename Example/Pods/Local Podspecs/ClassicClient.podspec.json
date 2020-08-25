@@ -20,6 +20,7 @@
   },
   "source_files": "ClassicClient/ClassicClient/**/*.swift",
   "resources": [
-    "ClassicClient/ClassicClient/*.xcassets"
+    "ClassicClient/ClassicClient/*.xcassets",
+    "ClassicClient/ClassicClient/**/*.{xib}"
   ]
 }

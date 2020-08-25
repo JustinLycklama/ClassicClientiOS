@@ -15,7 +15,7 @@ class LocationItemsViewController: UIViewController, UITableViewDelegate, UITabl
         static let DefaultCell = "defaultCell"
     }
     
-    private let transition = VHPresentFromViewTransition()
+    private let transition = PresentFromViewTransition()
     
     let tableview = UITableView.init(frame: .zero, style: .plain)
     let loadingView = LoadingView()

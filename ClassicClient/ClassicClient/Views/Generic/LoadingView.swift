@@ -25,7 +25,7 @@ public class LoadingView: UIViewController {
             self.view.addSubview(view)
         }
 
-        loadingIcon.image = UIImage(named: "loadingIcon", in: Bundle(for: type(of:self)), compatibleWith: nil)
+        loadingIcon.image = UIImage(named: "loading", in: Bundle(for: type(of:self)), compatibleWith: nil)
         loadingIcon.translatesAutoresizingMaskIntoConstraints = false
         
         iconView.addSubview(loadingIcon)

@@ -13,8 +13,10 @@
 		7D8362992423E62200B039E5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		7DBC8BB424253941000B0CE6 /* FakeServerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeServerProtocol.swift; sourceTree = "<group>"; };
 		7DBC8BBB242569C3000B0CE6 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		7DD4405424F4C0E500F4D568 /* GridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewController.swift; sourceTree = "<group>"; };
 		7DE223CF2429288E00A7F286 /* TwoItemFocusDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoItemFocusDisplay.swift; sourceTree = "<group>"; };
 		7DE223D52429397100A7F286 /* QuantityEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityEditorView.swift; sourceTree = "<group>"; };
+		7DE46A9524E36254003D97B4 /* HorizontalItemPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalItemPreviewViewController.swift; sourceTree = "<group>"; };
 		7DE5919D24DDCE910038D41E /* VHPresentFromViewTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHPresentFromViewTransition.swift; sourceTree = "<group>"; };
 		7DFCEC59242A6FD40063F89D /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -39,6 +41,7 @@
 			isa = PBXGroup;
 			children = (
 				7DBC8BB1242538E2000B0CE6 /* Services */,
+				7DE46A9424E36075003D97B4 /* View Controllers */,
 				7D8362962423E5D800B039E5 /* Views */,
 				7D8362822423DBFE00B039E5 /* Assets.xcassets */,
 				7D8362842423DBFE00B039E5 /* Preview Content */,
@@ -90,6 +93,15 @@
 				7DBC8BB424253941000B0CE6 /* FakeServerProtocol.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		7DE46A9424E36075003D97B4 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7DE46A9524E36254003D97B4 /* HorizontalItemPreviewViewController.swift */,
+				7DD4405424F4C0E500F4D568 /* GridViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		7DE5919B24DDAC990038D41E /* Transitions */ = {

@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'ClassicClient/ClassicClient/**/*.swift'	
-  s.resources = ["ClassicClient/ClassicClient/*.xcassets"]	
+  s.resources = ["ClassicClient/ClassicClient/*.xcassets", "ClassicClient/ClassicClient/**/*.{xib}"]	
   
   # s.resource_bundles = {
   #   'ClassicClient' => ['ClassicClient/Assets/*.png']

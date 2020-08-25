@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ClassicClient: bad76fa9bdbc35ff09860c8a59abc05116bd9bea
+  ClassicClient: 1c1f8bfd4a19c5361895cd5623aaa986918cd1f1
 
 PODFILE CHECKSUM: e82a0a94a19d863f1b259ae247e9b5e73f478d80
 
