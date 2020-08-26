@@ -8,12 +8,11 @@
 
 import UIKit
 
-open class GridViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+open class GridViewController: LoadableViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     private let StandardCellIdentifier = "Cell"
     private let StandardHeaderIdentifier = "Header"
 
-    
     private let numColumns = 2
     
     private let padding: CGFloat = 20
@@ -28,29 +27,41 @@ open class GridViewController: UIViewController, UICollectionViewDelegateFlowLay
     open override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         determineCellSize()
         
-        
         let layout = UICollectionViewFlowLayout()
-        
-    
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         collectionView.delegate = self
         collectionView.dataSource = self
-                
-        collectionView.backgroundColor = .red
+        
+        collectionView.backgroundColor = .white
         
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: StandardCellIdentifier)
         
-        collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: "?", withReuseIdentifier: StandardHeaderIdentifier)
+        collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: "Any", withReuseIdentifier: StandardHeaderIdentifier)
         
         view.addSubview(collectionView)
         view.constrainSubviewToBounds(collectionView)
         
         collection =  collectionView
+    }
+    
+    public func registerCellClass(cellClass: AnyClass?, identifier: String) {
+        collection?.register(cellClass, forCellWithReuseIdentifier: identifier)
+    }
+    
+    public func registerNib(xib: UINib, identifier: String) {
+        collection?.register(xib, forCellWithReuseIdentifier: identifier)
+    }
+    
+    public func registerSupplementaryNib(xib: UINib, kind: String, identifier: String) {
+        collection?.register(xib, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifier)
+    }
+    
+    public func reloadData() {
+        collection?.reloadData()
     }
     
     private func determineCellSize() {        
@@ -75,24 +86,8 @@ open class GridViewController: UIViewController, UICollectionViewDelegateFlowLay
         collection?.reloadData()
     }
     
-    public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
-    }
-    
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: 0, height: headerHeight)
-    }
-    
-    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: "?", withReuseIdentifier: StandardHeaderIdentifier, for: indexPath)
-        
-        header.backgroundColor = .green
-        
-        return header
     }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -103,7 +98,27 @@ open class GridViewController: UIViewController, UICollectionViewDelegateFlowLay
         return cellSize
     }
     
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    /*
+     * Overwritable
+     */
+    
+    open func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
+    open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    open func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: "Any", withReuseIdentifier: StandardHeaderIdentifier, for: indexPath)
+        
+        header.backgroundColor = .green
+        
+        return header
+    }
+    
+    open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StandardCellIdentifier, for: indexPath)
         
         cell.backgroundColor = .blue

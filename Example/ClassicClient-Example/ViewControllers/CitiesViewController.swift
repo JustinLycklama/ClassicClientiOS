@@ -37,6 +37,10 @@ class CitiesViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableview.translatesAutoresizingMaskIntoConstraints = false
         loadingView.view.translatesAutoresizingMaskIntoConstraints = false
         
+        let achieveButton = UIBarButtonItem(image: UIImage(named: "best"), style: .plain, target: self, action: #selector(openAchievements))
+        
+        navigationItem.setRightBarButton(achieveButton, animated: false)
+        
         self.view.addSubview(tableview)
         
         self.view.constrainSubviewToBounds(tableview)
@@ -83,6 +87,12 @@ class CitiesViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @objc func logout() {
         loadingView.setLoading(true)
         LoginViewModel.sharedInstance.logout()
+    }
+    
+    @objc func openAchievements() {
+        let VC = AchievementViewController()
+        
+        navigationController?.pushViewController(VC, animated: true)
     }
     
     // MARK: Tableview Datasource

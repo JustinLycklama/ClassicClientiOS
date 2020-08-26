@@ -62,10 +62,7 @@ class LocationsViewControler: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let itemsVC = LocationItemsViewController(forLocation: cityLocations[indexPath.row])
-        
-        let itemsVC = AchievementViewController()
-        
+        let itemsVC = LocationItemsViewController(forLocation: cityLocations[indexPath.row])
         
         navigationController?.pushViewController(itemsVC, animated: true)
 

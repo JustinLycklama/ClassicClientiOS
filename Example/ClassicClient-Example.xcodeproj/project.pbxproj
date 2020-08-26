@@ -8,7 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		275FA584B6186E623B3D6C9E /* Pods_ClassicClient_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1C684A6A8F618D762F2B44F /* Pods_ClassicClient_Example.framework */; };
+		7D869A4224F614E700B4953B /* achievements.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D869A4124F614E700B4953B /* achievements.json */; };
+		7D869A4424F6156100B4953B /* AchievementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D869A4324F6156100B4953B /* AchievementViewModel.swift */; };
+		7D869A4624F6157200B4953B /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D869A4524F6157200B4953B /* Achievement.swift */; };
+		7D869A4824F615D600B4953B /* AchievementService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D869A4724F615D600B4953B /* AchievementService.swift */; };
+		7D869A5024F6C2AC00B4953B /* AchievementHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D869A4E24F6C2AC00B4953B /* AchievementHeaderCell.swift */; };
+		7D869A5124F6C2AC00B4953B /* AchievementHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7D869A4F24F6C2AC00B4953B /* AchievementHeaderCell.xib */; };
 		7DD4405324F4C08000F4D568 /* AchievementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD4405224F4C08000F4D568 /* AchievementViewController.swift */; };
+		7DD4405E24F60F7300F4D568 /* AchievementCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD4405C24F60F7300F4D568 /* AchievementCollectionViewCell.swift */; };
+		7DD4405F24F60F7300F4D568 /* AchievementCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7DD4405D24F60F7300F4D568 /* AchievementCollectionViewCell.xib */; };
 		7DE46A3624E34A7F003D97B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE46A3524E34A7F003D97B4 /* AppDelegate.swift */; };
 		7DE46A3824E34A7F003D97B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE46A3724E34A7F003D97B4 /* SceneDelegate.swift */; };
 		7DE46A3A24E34A7F003D97B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE46A3924E34A7F003D97B4 /* ViewController.swift */; };
@@ -43,7 +51,15 @@
 		19D62317FB434CB574450247 /* ClassicClient.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = ClassicClient.podspec; path = ../ClassicClient.podspec; sourceTree = "<group>"; };
 		5869780202D71D1573911914 /* Pods-ClassicClient-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClassicClient-Example.release.xcconfig"; path = "Target Support Files/Pods-ClassicClient-Example/Pods-ClassicClient-Example.release.xcconfig"; sourceTree = "<group>"; };
 		6C9176F553E1004FEB3C37DC /* Pods-ClassicClient_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ClassicClient_Tests.debug.xcconfig"; path = "Target Support Files/Pods-ClassicClient_Tests/Pods-ClassicClient_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		7D869A4124F614E700B4953B /* achievements.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = achievements.json; sourceTree = "<group>"; };
+		7D869A4324F6156100B4953B /* AchievementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementViewModel.swift; sourceTree = "<group>"; };
+		7D869A4524F6157200B4953B /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
+		7D869A4724F615D600B4953B /* AchievementService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementService.swift; sourceTree = "<group>"; };
+		7D869A4E24F6C2AC00B4953B /* AchievementHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementHeaderCell.swift; sourceTree = "<group>"; };
+		7D869A4F24F6C2AC00B4953B /* AchievementHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementHeaderCell.xib; sourceTree = "<group>"; };
 		7DD4405224F4C08000F4D568 /* AchievementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementViewController.swift; sourceTree = "<group>"; };
+		7DD4405C24F60F7300F4D568 /* AchievementCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementCollectionViewCell.swift; sourceTree = "<group>"; };
+		7DD4405D24F60F7300F4D568 /* AchievementCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AchievementCollectionViewCell.xib; sourceTree = "<group>"; };
 		7DE46A3324E34A7E003D97B4 /* ClassicClient-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ClassicClient-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DE46A3524E34A7F003D97B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7DE46A3724E34A7F003D97B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,9 +139,25 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
+		7DD4405B24F60F0E00F4D568 /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				7D869A4524F6157200B4953B /* Achievement.swift */,
+				7D869A4724F615D600B4953B /* AchievementService.swift */,
+				7D869A4324F6156100B4953B /* AchievementViewModel.swift */,
+				7DD4405224F4C08000F4D568 /* AchievementViewController.swift */,
+				7DD4405C24F60F7300F4D568 /* AchievementCollectionViewCell.swift */,
+				7DD4405D24F60F7300F4D568 /* AchievementCollectionViewCell.xib */,
+				7D869A4E24F6C2AC00B4953B /* AchievementHeaderCell.swift */,
+				7D869A4F24F6C2AC00B4953B /* AchievementHeaderCell.xib */,
+			);
+			path = Achievements;
+			sourceTree = "<group>";
+		};
 		7DE46A3424E34A7F003D97B4 /* ClassicClient-Example */ = {
 			isa = PBXGroup;
 			children = (
+				7DD4405B24F60F0E00F4D568 /* Achievements */,
 				7DE46A6C24E34D8F003D97B4 /* data */,
 				7DE46A5724E34D8F003D97B4 /* Models */,
 				7DE46A5A24E34D8F003D97B4 /* Services */,
@@ -182,7 +214,6 @@
 				7DE46A6324E34D8F003D97B4 /* CCTableViewController.swift */,
 				7DE46A6424E34D8F003D97B4 /* LoginViewController.swift */,
 				7DE46A6524E34D8F003D97B4 /* LocationItemsViewController.swift */,
-				7DD4405224F4C08000F4D568 /* AchievementViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -209,6 +240,7 @@
 		7DE46A6C24E34D8F003D97B4 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				7D869A4124F614E700B4953B /* achievements.json */,
 				7DE46A6D24E34D8F003D97B4 /* locations.json */,
 				7DE46A6E24E34D8F003D97B4 /* success.json */,
 				7DE46A6F24E34D8F003D97B4 /* items.json */,
@@ -300,12 +332,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7DE46A7F24E34D90003D97B4 /* ItemTableViewCell.xib in Resources */,
+				7D869A4224F614E700B4953B /* achievements.json in Resources */,
 				7DE46A4224E34A82003D97B4 /* LaunchScreen.storyboard in Resources */,
+				7D869A5124F6C2AC00B4953B /* AchievementHeaderCell.xib in Resources */,
 				7DE46A3F24E34A82003D97B4 /* Assets.xcassets in Resources */,
 				7DE46A3D24E34A7F003D97B4 /* Main.storyboard in Resources */,
 				7DE46A8524E34D90003D97B4 /* items.json in Resources */,
 				7DE46A8424E34D90003D97B4 /* success.json in Resources */,
 				7DE46A8324E34D90003D97B4 /* locations.json in Resources */,
+				7DD4405F24F60F7300F4D568 /* AchievementCollectionViewCell.xib in Resources */,
 				7DE46A8024E34D90003D97B4 /* CityLocationTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,15 +398,20 @@
 				7DE46A7024E34D90003D97B4 /* LoginViewModel.swift in Sources */,
 				7DE46A7224E34D90003D97B4 /* LocationViewModel.swift in Sources */,
 				7DE46A7B24E34D90003D97B4 /* LocationsViewControler.swift in Sources */,
+				7D869A4424F6156100B4953B /* AchievementViewModel.swift in Sources */,
+				7D869A5024F6C2AC00B4953B /* AchievementHeaderCell.swift in Sources */,
 				7DE46A7C24E34D90003D97B4 /* CCTableViewController.swift in Sources */,
+				7D869A4624F6157200B4953B /* Achievement.swift in Sources */,
 				7DE46A8124E34D90003D97B4 /* ItemTableViewCell.swift in Sources */,
 				7DE46A3A24E34A7F003D97B4 /* ViewController.swift in Sources */,
 				7DE46A7524E34D90003D97B4 /* ItemService.swift in Sources */,
+				7D869A4824F615D600B4953B /* AchievementService.swift in Sources */,
 				7DE46A7A24E34D90003D97B4 /* ItemQuantityViewController.swift in Sources */,
 				7DE46A3624E34A7F003D97B4 /* AppDelegate.swift in Sources */,
 				7DE46A7924E34D90003D97B4 /* SignatureViewController.swift in Sources */,
 				7DE46A7424E34D90003D97B4 /* Item.swift in Sources */,
 				7DD4405324F4C08000F4D568 /* AchievementViewController.swift in Sources */,
+				7DD4405E24F60F7300F4D568 /* AchievementCollectionViewCell.swift in Sources */,
 				7DE46A7724E34D90003D97B4 /* LocationService.swift in Sources */,
 				7DE46A7124E34D90003D97B4 /* ItemViewModel.swift in Sources */,
 				7DE46A7624E34D90003D97B4 /* LoginService.swift in Sources */,
