@@ -14,7 +14,7 @@ public class HorizontalItemPreviewCell: UICollectionViewCell {
     public override func awakeFromNib() {
         super.awakeFromNib()
         
-        roundedBackground.layer.cornerRadius = 10
+        roundedBackground.layer.cornerRadius = WreathedDetailView.CornerRaduis
         
         
     }

@@ -9,8 +9,8 @@
 import UIKit
 
 open class HorizontalItemPreviewViewController: UIViewController {
-
-    private let transition = HorizontalItemTransition()
+    
+    private let transition = WreathedDetailTransition()
     
 //    let layout: UICollectionViewLayout
     public let collectionArea = UIView()
@@ -36,7 +36,6 @@ open class HorizontalItemPreviewViewController: UIViewController {
         print("hello!")
         
         navigationController?.delegate = self
-
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
 
