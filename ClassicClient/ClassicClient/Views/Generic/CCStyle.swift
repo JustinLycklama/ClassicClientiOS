@@ -21,6 +21,11 @@ struct ColorPalette {
     fileprivate static let accentColor = UIColor(rgb: 0x0bbaba)
     fileprivate static let continueColor = UIColor(rgb: 0x04b355)
     fileprivate static let stopColor = UIColor(rgb: 0xcf5408)
+    
+    fileprivate static let darkTeal = UIColor(rgb: 0x006d77)
+    fileprivate static let lightTeal = UIColor(rgb: 0x83c5be)
+
+    
 }
 
 public struct CCStyle {
@@ -37,12 +42,14 @@ public struct CCStyle {
     public static let cancelButtonBackgroundColor = ColorPalette.stopColor
     public static let accentButtonBackgroundColor = ColorPalette.accentColor
     
+    public static var primaryBackgroundColor = ColorPalette.darkTeal
+    
     public static func fontWithSize(size: CGFloat, andType type: FontType = .text) -> UIFont {
         return UIFont.init(name: type.rawValue, size: size) ?? UIFont.init()
     }
 }
 
-extension UIColor {
+public extension UIColor {
    convenience init(red: Int, green: Int, blue: Int) {
        assert(red >= 0 && red <= 255, "Invalid red component")
        assert(green >= 0 && green <= 255, "Invalid green component")

@@ -9,11 +9,13 @@ import UIKit
 
 open class WreathedDetailViewController: UIViewController {
 
-    public let detailView = WreathedDetailView()
+    open var viewType: WreathedDetailView.Type {
+        return WreathedDetailView.self
+    }
     
-//    public let itemViewMetrics = ["hPadding" : 12]
-    
-    public static let constraintEdges = UIEdgeInsets(top: 64, left: 64, bottom: 64, right: 64)
+    public var detailView: WreathedDetailView!
+        
+    public static let constraintEdges = UIEdgeInsets(top: 64, left: 32, bottom: 32, right: 32)
     public static let constraintContext = LayoutConstraintContext(horizontalVisualString: "H:|-(left)-[view]-(right)-|",
                                                                       verticalVisualString: "V:|-(top)-[view]-(bottom)-|",
                                                                       options: [],
@@ -22,16 +24,25 @@ open class WreathedDetailViewController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        detailView = viewType.init()
         self.edgesForExtendedLayout = []
-
-//        let vertConstraints = NSLayoutConstraint.with
         
         detailView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(detailView)
         view.addConstraints(NSLayoutConstraint.constraints(givenContext: WreathedDetailViewController.constraintContext,
                                                            forView: detailView))
+    }
+    
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.animate(withDuration: 1.0, delay: 0.5, options: .curveEaseInOut, animations: {
+            self.detailView.completeTransition()
+
+        }) { (completed: Bool) in
+            
+        }
     }
 }
 

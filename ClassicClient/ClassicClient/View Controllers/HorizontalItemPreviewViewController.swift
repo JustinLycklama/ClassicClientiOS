@@ -10,11 +10,20 @@ import UIKit
 
 open class HorizontalItemPreviewViewController: UIViewController {
     
-    private let transition = WreathedDetailTransition()
+    private var transition: WreathedDetailTransition?
     
 //    let layout: UICollectionViewLayout
     public let collectionArea = UIView()
-//    public var collectionView: UICollectionView?
+    public var collectionView: UICollectionView?
+    
+    private let itemHeight = 200
+    private let itemsPerPage = 2
+    
+    private var itemWidth: Int {
+        get {
+            return Int(self.view.frame.width / (CGFloat(itemsPerPage) + 0.5))
+        }
+    }
     
     public init() {
 
@@ -46,7 +55,7 @@ open class HorizontalItemPreviewViewController: UIViewController {
 
         cView.backgroundView = nil
         cView.backgroundColor = .clear
-
+        
         layout.scrollDirection = UICollectionView.ScrollDirection.horizontal
         
 //        cView.contentSize = CGSize(width: 1000, height: 200)
@@ -61,8 +70,10 @@ open class HorizontalItemPreviewViewController: UIViewController {
 
         let views = ["cArea" : collectionArea]
         
+        let metrics = ["height" : itemHeight + 50]
+        
         let horizontal = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[cArea]-(0)-|", options: .alignAllCenterX, metrics: nil, views: views)
-        let vertical = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(>=0)-[cArea(200)]-(0)-|", options: .alignAllCenterX, metrics: nil, views: views)
+        let vertical = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(>=0)-[cArea(height)]-(32)-|", options: .alignAllCenterX, metrics: metrics, views: views)
         
         self.view.addConstraints(horizontal)
         self.view.addConstraints(vertical)
@@ -79,17 +90,33 @@ open class HorizontalItemPreviewViewController: UIViewController {
 //        cView.invalidateIntrinsicContentSize()
 
         
-//        collectionView = cView
+        collectionView = cView
         
+    }
+    
+    public func registerCellClass(cellClass: AnyClass?, identifier: String) {
+        collectionView?.register(cellClass, forCellWithReuseIdentifier: identifier)
+    }
+    
+    public func registerNib(xib: UINib, identifier: String) {
+        collectionView?.register(xib, forCellWithReuseIdentifier: identifier)
+    }
+    
+    public func registerSupplementaryNib(xib: UINib, kind: String, identifier: String) {
+        collectionView?.register(xib, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifier)
+    }
+    
+    public func setTransition<T>(t: T) where T : WreathedDetailTransition {
+        transition = t
     }
 }
 
 extension HorizontalItemPreviewViewController: UICollectionViewDataSource {
-    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    open func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 7
     }
         
-    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         
@@ -101,15 +128,15 @@ extension HorizontalItemPreviewViewController: UICollectionViewDataSource {
 
 extension HorizontalItemPreviewViewController: UICollectionViewDelegate {
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        transition.fromView = collectionView.cellForItem(at: indexPath)
-        transition.viewContainer = collectionView
+        transition?.fromView = collectionView.cellForItem(at: indexPath)
+        transition?.viewContainer = collectionView
     }
 }
 
 extension HorizontalItemPreviewViewController: UICollectionViewDelegateFlowLayout {
             
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 100, height: 100)
+        return CGSize(width: itemWidth, height: itemHeight)
     }
 
     
@@ -193,19 +220,19 @@ public class HorizontalItemLayout: UICollectionViewLayout {
 
 extension HorizontalItemPreviewViewController: UIViewControllerTransitioningDelegate, UINavigationControllerDelegate {
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.presenting = true
+        transition?.presenting = true
         return transition
     }
     
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        transition.presenting = false
+        transition?.presenting = false
         return transition
     }
     
     public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning {
         
-        transition.presenting = (operation != .pop)
-        return transition
+        transition?.presenting = (operation != .pop)
+        return transition! // TODO remove !
     }
     
     

@@ -7,21 +7,29 @@
 
 import UIKit
 
-public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransitioning { 
+public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransitioning {
 
     public var fromView: UIView?
     public var viewContainer: UIView?
     public var presenting: Bool = false
     
+    private let detailType: WreathedDetailView.Type
+    
+    public init(_ wreathedDetailType: WreathedDetailView.Type) {
+        detailType = wreathedDetailType
+
+        super.init()
+    }
+    
     private var endingFrameForWreathInPresentation: CGRect?
     
     struct ContextViews {
         var maskView: UIView?
-        var wreathedDetailView: WreathedDetailView
+        var wreathedDetailView: UIView
         var originFrame: CGRect
     }
     
-    private let completionDuration = 0.75
+    private let completionDuration = 0.65
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.9
     }
@@ -41,7 +49,7 @@ public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransit
             maskView?.layer.cornerRadius = WreathedDetailView.CornerRaduis
         }
         
-        var wreathedDetailView = WreathedDetailView()
+        var wreathedDetailView = detailType.init()
         containerView.addSubview(wreathedDetailView)
         
         return ContextViews(maskView: maskView, wreathedDetailView: wreathedDetailView, originFrame: originFrame ?? .zero)
@@ -70,13 +78,14 @@ public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransit
             let contextViews = getContextViews(inContainer: containerContentView)
                         
             contextViews.wreathedDetailView.frame = contextViews.originFrame
+            contextViews.wreathedDetailView.layoutIfNeeded()
             
             toViewController.view.mask = contextViews.maskView
             toViewController.view.alpha = 0.15
             
             let totalDuration = transitionDuration(using: transitionContext)
             
-            let clickDuration = 0.20
+            let clickDuration = 0.30
             let remainingDuration = totalDuration - clickDuration
             
             let secondaryDuration = remainingDuration * 0.66
@@ -87,20 +96,29 @@ public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransit
             containerView.insertSubview(toViewController.view, aboveSubview: fromViewController.view)
             
 
-            fromView?.alpha = 0
+//            fromView?.alpha = 0
+            
+            
             
             // Do the cell 'select' animation
+            contextViews.wreathedDetailView.alpha = 0
+            
             dispatchGroup.enter()
             UIView.animateKeyframes(withDuration: clickDuration, delay: 0.0, options: .calculationModeCubic, animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.5, animations: {
+                    self.fromView?.layer.transform = CATransform3DMakeScale(0.8, 0.8, 1)
                     contextViews.wreathedDetailView.layer.transform = CATransform3DMakeScale(0.8, 0.8, 1)
                 })
                 UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 0.5, animations: {
+                    self.fromView?.transform = .identity
                     contextViews.wreathedDetailView.transform = .identity
+
                 })
+                
+                contextViews.wreathedDetailView.alpha = 1
             }) { (completed: Bool) in
                 dispatchGroup.leave()
-                self.fromView?.alpha = 1
+//                self.fromView?.alpha = 1
             }
                 
             
@@ -117,6 +135,7 @@ public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransit
                                 forView: contextViews.wreathedDetailView))
                             
                             containerContentView.layoutIfNeeded()
+                            contextViews.wreathedDetailView.layoutIfNeeded()
                             
             }) { (finished: Bool) in
                 
@@ -176,6 +195,7 @@ public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransit
               }
             
             contextViews.wreathedDetailView.frame = endingFrameForWreathInPresentation ?? .zero
+            contextViews.wreathedDetailView.layoutIfNeeded()
             
             dispatchGroup.enter()
             UIView.animate(withDuration: completionDuration - fadeInFakeWreathDuration,
@@ -185,14 +205,22 @@ public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransit
                             
                             contextViews.maskView?.frame = contextViews.originFrame
                             contextViews.wreathedDetailView.frame = contextViews.originFrame
+                            
+                            contextViews.wreathedDetailView.layoutIfNeeded()
 
             }) { (finished: Bool) in
-                fromViewController.view.mask = nil
                 
-                contextViews.wreathedDetailView.removeFromSuperview()
-                containerContentView.removeFromSuperview()
+                fromViewController.view.alpha = 0
                 
-                dispatchGroup.leave()
+                UIView.animate(withDuration: 0.15, animations: {
+                    contextViews.wreathedDetailView.alpha = 0
+                }) { (complete: Bool) in
+                    contextViews.wreathedDetailView.removeFromSuperview()
+                    containerContentView.removeFromSuperview()
+                    
+                    fromViewController.view.mask = nil
+                    dispatchGroup.leave()
+                }
             }
 
 //            dispatchGroup.enter()

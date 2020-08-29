@@ -109,3 +109,18 @@ public extension UIView {
         return UINib(nibName: xibName, bundle: bundle).instantiate(withOwner: nil, options: nil)[0] as! UIView
     }
 }
+
+public extension UIImage {
+    var roundedImage: UIImage? {
+        let rect = CGRect(origin:CGPoint(x: 0, y: 0), size: self.size)
+        UIGraphicsBeginImageContextWithOptions(self.size, false, 1)
+
+        UIBezierPath(
+            roundedRect: rect,
+            cornerRadius: self.size.height
+            ).addClip()
+
+        self.draw(in: rect)
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+}

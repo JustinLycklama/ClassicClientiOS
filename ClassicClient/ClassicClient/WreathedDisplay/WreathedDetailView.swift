@@ -8,11 +8,11 @@
 
 import UIKit
 
-public class WreathedDetailView: UIView {
+open class WreathedDetailView: UIView {
 
     public static let CornerRaduis: CGFloat = 10
     
-    init() {
+    public required init() {
         super.init(frame: .zero)
         initialize()
     }
@@ -22,13 +22,17 @@ public class WreathedDetailView: UIView {
         initialize()
     }
     
-    required init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
         initialize()
     }
     
-    private func initialize() {
+    open func initialize() {
         backgroundColor = .green
         self.layer.cornerRadius = WreathedDetailView.CornerRaduis
+    }
+    
+    open func completeTransition() {
+
     }
 }
