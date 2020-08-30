@@ -124,3 +124,20 @@ public extension UIImage {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
+
+public protocol Loadable: AnyObject {
+    var loadingView: LoadingView? { get set }
+}
+
+public extension Loadable where Self: UIViewController {
+    func addLoadingView() {
+        let lView = LoadingView()
+        
+        self.addChild(lView)
+        self.view.addSubview(lView.view)
+        self.view.constrainSubviewToBounds(lView.view)
+        self.view.bringSubviewToFront(lView.view)
+        
+        loadingView = lView
+    }
+}

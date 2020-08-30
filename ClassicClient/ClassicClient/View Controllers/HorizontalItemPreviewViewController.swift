@@ -106,6 +106,10 @@ open class HorizontalItemPreviewViewController: UIViewController {
         collectionView?.register(xib, forSupplementaryViewOfKind: kind, withReuseIdentifier: identifier)
     }
     
+    public func reloadData() {
+        collectionView?.reloadData()
+    }
+    
     public func setTransition<T>(t: T) where T : WreathedDetailTransition {
         transition = t
     }

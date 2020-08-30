@@ -8,7 +8,9 @@
 
 import UIKit
 
-open class GridViewController: LoadableViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+open class GridViewController: UIViewController, Loadable, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    
+    public var loadingView: LoadingView?
 
     private let StandardCellIdentifier = "Cell"
     private let StandardHeaderIdentifier = "Header"

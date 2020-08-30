@@ -22,6 +22,7 @@
 		7DE223D52429397100A7F286 /* QuantityEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityEditorView.swift; sourceTree = "<group>"; };
 		7DE46A9524E36254003D97B4 /* HorizontalItemPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalItemPreviewViewController.swift; sourceTree = "<group>"; };
 		7DE5919D24DDCE910038D41E /* VHPresentFromViewTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHPresentFromViewTransition.swift; sourceTree = "<group>"; };
+		7DF9E2A024FAE7B600FD60A3 /* CCMoyaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCMoyaService.swift; sourceTree = "<group>"; };
 		7DFCEC59242A6FD40063F89D /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				7DBC8BB424253941000B0CE6 /* FakeServerProtocol.swift */,
+				7DF9E2A024FAE7B600FD60A3 /* CCMoyaService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";

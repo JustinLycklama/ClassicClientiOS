@@ -9,7 +9,7 @@
 import UIKit
 
 public enum FontType: String {
-    case title = "Avenir-Heavy"
+    case title = "KohinoorDevanagari-Book" //BodoniSvtyTwoITCTT-BookIta"
     case text = "Avenir-Light"
 }
 

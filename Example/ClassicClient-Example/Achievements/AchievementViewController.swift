@@ -45,9 +45,9 @@ class AchievementViewController: GridViewController {
         
         super.registerSupplementaryNib(xib: UINib(nibName: "AchievementHeaderCell", bundle: nil), kind: UICollectionView.elementKindSectionHeader, identifier: headerIdentifier)
         
-        self.view.bringSubviewToFront(loadingView.view)
+        addLoadingView()
         
-        loadingView.setLoading(true)
+        loadingView?.setLoading(true)
         AchievementViewModel.sharedInstance.getAchievements { [weak self] (result: Result<Achievement>) in
             switch result {
             case .success(let results):
@@ -58,7 +58,7 @@ class AchievementViewController: GridViewController {
                 break;
             }
             
-            self?.loadingView.setLoading(false)
+            self?.loadingView?.setLoading(false)
         }
         
     }
