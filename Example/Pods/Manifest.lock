@@ -1,16 +1,44 @@
 PODS:
-  - ClassicClient (0.1.0)
+  - Alamofire (5.2.2)
+  - ClassicClient (0.1.0):
+    - Moya (~> 14.0)
+    - Moya-ObjectMapper (~> 2.9)
+    - Result (~> 5.0)
+  - Moya (14.0.0):
+    - Moya/Core (= 14.0.0)
+  - Moya-ObjectMapper (2.9):
+    - Moya-ObjectMapper/Core (= 2.9)
+  - Moya-ObjectMapper/Core (2.9):
+    - Moya (~> 14.0.0-beta.6)
+    - ObjectMapper
+  - Moya/Core (14.0.0):
+    - Alamofire (~> 5.0)
+  - ObjectMapper (4.2.0)
+  - Result (5.0.0)
 
 DEPENDENCIES:
   - ClassicClient (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Moya
+    - Moya-ObjectMapper
+    - ObjectMapper
+    - Result
 
 EXTERNAL SOURCES:
   ClassicClient:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ClassicClient: 1c1f8bfd4a19c5361895cd5623aaa986918cd1f1
+  Alamofire: 814429acc853c6c54ff123fc3d2ef66803823ce0
+  ClassicClient: 53d0becafa90f12b3d85fb2427f5502329bf8dd9
+  Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  Moya-ObjectMapper: 967a99d9ea3aa9c93ddbe112aeca3667f53bfe93
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  Result: ed341d2f236af425b803e690e9bd8fd0a0cb7c5a
 
-PODFILE CHECKSUM: e82a0a94a19d863f1b259ae247e9b5e73f478d80
+PODFILE CHECKSUM: 471815bdf6dfeb8382edc430acab6bf24f9f30cb
 
 COCOAPODS: 1.9.3

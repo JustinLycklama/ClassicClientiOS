@@ -40,4 +40,9 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
+  
+   	s.dependency 'Moya', '~> 14.0'
+    s.dependency 'Moya-ObjectMapper', '~> 2.9'
+	s.dependency 'Result', '~> 5.0'
+  
 end

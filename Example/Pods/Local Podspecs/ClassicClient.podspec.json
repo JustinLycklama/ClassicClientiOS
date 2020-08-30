@@ -22,5 +22,16 @@
   "resources": [
     "ClassicClient/ClassicClient/*.xcassets",
     "ClassicClient/ClassicClient/**/*.{xib}"
-  ]
+  ],
+  "dependencies": {
+    "Moya": [
+      "~> 14.0"
+    ],
+    "Moya-ObjectMapper": [
+      "~> 2.9"
+    ],
+    "Result": [
+      "~> 5.0"
+    ]
+  }
 }
