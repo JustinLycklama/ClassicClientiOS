@@ -13,11 +13,14 @@ public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransit
     public var viewContainer: UIView?
     public var presenting: Bool = false
     
+    public var title: String
+    
     private let detailType: WreathedDetailView.Type
     
     public init(_ wreathedDetailType: WreathedDetailView.Type) {
         detailType = wreathedDetailType
-
+        title = ""
+        
         super.init()
     }
     
@@ -29,9 +32,9 @@ public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransit
         var originFrame: CGRect
     }
     
-    private let completionDuration = 0.65
+    private let completionDuration = 0.35
     public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.9
+        return 0.6
     }
     
     private func getContextViews(inContainer containerView: UIView) -> ContextViews {
@@ -50,6 +53,8 @@ public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransit
         }
         
         var wreathedDetailView = detailType.init()
+        wreathedDetailView.setTitle(title)
+        
         containerView.addSubview(wreathedDetailView)
         
         return ContextViews(maskView: maskView, wreathedDetailView: wreathedDetailView, originFrame: originFrame ?? .zero)
@@ -85,7 +90,7 @@ public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransit
             
             let totalDuration = transitionDuration(using: transitionContext)
             
-            let clickDuration = 0.30
+            let clickDuration = totalDuration * 0.33
             let remainingDuration = totalDuration - clickDuration
             
             let secondaryDuration = remainingDuration * 0.66
@@ -144,7 +149,7 @@ public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransit
                 
                 UIView.animate(withDuration: finalDuration,
                                    delay: 0,
-                                   options: .curveEaseOut,
+                                   options: .curveEaseIn,
                                    animations: {
                                     
                                     toViewController.view.alpha = 1
@@ -184,7 +189,7 @@ public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransit
               dispatchGroup.enter()
               UIView.animate(withDuration: fadeInFakeWreathDuration,
                              delay: 0.0,
-                             options: .curveEaseOut,
+                             options: .curveEaseIn,
                              animations: {
 
                                 contextViews.maskView?.frame = self.endingFrameForWreathInPresentation ?? .zero
@@ -200,7 +205,7 @@ public class WreathedDetailTransition: NSObject, UIViewControllerAnimatedTransit
             dispatchGroup.enter()
             UIView.animate(withDuration: completionDuration - fadeInFakeWreathDuration,
                            delay: fadeInFakeWreathDuration,
-                           options: .curveEaseOut,
+                           options: .curveEaseIn,
                            animations: {
                             
                             contextViews.maskView?.frame = contextViews.originFrame

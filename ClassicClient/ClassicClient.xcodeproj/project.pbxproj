@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		7D2A1A3824FB55A600EEC4D2 /* ResourceSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceSingleton.swift; sourceTree = "<group>"; };
 		7D7410252425C9A400D75B82 /* CCStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCStyle.swift; sourceTree = "<group>"; };
 		7D8362822423DBFE00B039E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D8362852423DBFE00B039E5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -82,6 +83,7 @@
 				7D7410252425C9A400D75B82 /* CCStyle.swift */,
 				7DE223CF2429288E00A7F286 /* TwoItemFocusDisplay.swift */,
 				7DFCEC59242A6FD40063F89D /* DrawingView.swift */,
+				7D2A1A3824FB55A600EEC4D2 /* ResourceSingleton.swift */,
 			);
 			path = Generic;
 			sourceTree = "<group>";

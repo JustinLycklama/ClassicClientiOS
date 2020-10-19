@@ -35,4 +35,8 @@ open class WreathedDetailView: UIView {
     open func completeTransition() {
 
     }
+    
+    open func setTitle(_ title: String) {
+        
+    }
 }

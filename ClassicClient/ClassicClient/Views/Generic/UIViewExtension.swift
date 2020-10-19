@@ -9,7 +9,7 @@
 import UIKit
 
 public extension UIView {
-    func constrainSubviewToBounds(_ subview: UIView, withInset inset: UIEdgeInsets = UIEdgeInsets.zero) {
+    func constrainSubviewToBounds(_ subview: UIView, onEdges edges: UIRectEdge = .all, withInset inset: UIEdgeInsets = UIEdgeInsets.zero) {
         // subview must be a subview of our cell to be constrained
         if self.subviews.contains(subview) == false {
             return
@@ -18,10 +18,21 @@ public extension UIView {
         subview.translatesAutoresizingMaskIntoConstraints = false
         var clingConstraints = [NSLayoutConstraint]()
         
-        clingConstraints += [NSLayoutConstraint.init(item: subview, attribute: .trailing, relatedBy:.equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -inset.right)]
-        clingConstraints += [NSLayoutConstraint.init(item: subview, attribute: .bottom, relatedBy:.equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -inset.bottom)]
-        clingConstraints += [NSLayoutConstraint.init(item: subview, attribute: .top, relatedBy:.equal, toItem: self, attribute: .top, multiplier: 1, constant: inset.top)]
-        clingConstraints += [NSLayoutConstraint.init(item: subview, attribute: .leading, relatedBy:.equal, toItem: self, attribute: .leading, multiplier: 1, constant: inset.left)]
+        if edges.contains(.bottom) {
+            clingConstraints += [NSLayoutConstraint.init(item: subview, attribute: .bottom, relatedBy:.equal, toItem: self, attribute: .bottom, multiplier: 1, constant: -inset.bottom)]
+        }
+        
+        if edges.contains(.top) {
+            clingConstraints += [NSLayoutConstraint.init(item: subview, attribute: .top, relatedBy:.equal, toItem: self, attribute: .top, multiplier: 1, constant: inset.top)]
+        }
+        
+        if edges.contains(.left) {
+            clingConstraints += [NSLayoutConstraint.init(item: subview, attribute: .leading, relatedBy:.equal, toItem: self, attribute: .leading, multiplier: 1, constant: inset.left)]
+        }
+        
+        if edges.contains(.right) {
+            clingConstraints += [NSLayoutConstraint.init(item: subview, attribute: .trailing, relatedBy:.equal, toItem: self, attribute: .trailing, multiplier: 1, constant: -inset.right)]
+        }
         
         NSLayoutConstraint.activate(clingConstraints)
     }
@@ -117,7 +128,7 @@ public extension UIImage {
 
         UIBezierPath(
             roundedRect: rect,
-            cornerRadius: self.size.height
+            cornerRadius: 10
             ).addClip()
 
         self.draw(in: rect)

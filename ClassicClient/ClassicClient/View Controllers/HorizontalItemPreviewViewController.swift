@@ -21,7 +21,7 @@ open class HorizontalItemPreviewViewController: UIViewController {
     
     private var itemWidth: Int {
         get {
-            return Int(self.view.frame.width / (CGFloat(itemsPerPage) + 0.5))
+            return Int(self.view.frame.width / (CGFloat(itemsPerPage) + 0.33))
         }
     }
     
@@ -49,7 +49,7 @@ open class HorizontalItemPreviewViewController: UIViewController {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
 
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        layout.itemSize = CGSize(width: 60, height: 60)
+//        layout.itemSize = CGSize(width: 60, height: 60)
             
         let cView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
 
@@ -62,6 +62,22 @@ open class HorizontalItemPreviewViewController: UIViewController {
         
         collectionArea.translatesAutoresizingMaskIntoConstraints = false
         
+        collectionArea.backgroundColor = UIColor(rgb: 0xf8f8ff)
+        collectionArea.layer.cornerRadius = 10
+        if #available(iOS 11.0, *) {
+            collectionArea.layer.maskedCorners = [.layerMinXMinYCorner]
+        } else {
+            // Fallback on earlier versions
+        }
+        
+//        let maskPath = UIBezierPath(roundedRect: collectionArea.bounds,
+//                    byRoundingCorners: [.topLeft],
+//                    cornerRadii: CGSize(width: 10.0, height: 10.0))
+//
+//        let shape = CAShapeLayer()
+//        shape.path = maskPath.cgPath
+//        collectionArea.layer.mask = shape
+        
         collectionArea.addSubview(cView)
         collectionArea.constrainSubviewToBounds(cView)
                 
@@ -73,7 +89,7 @@ open class HorizontalItemPreviewViewController: UIViewController {
         let metrics = ["height" : itemHeight + 50]
         
         let horizontal = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(0)-[cArea]-(0)-|", options: .alignAllCenterX, metrics: nil, views: views)
-        let vertical = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(>=0)-[cArea(height)]-(32)-|", options: .alignAllCenterX, metrics: metrics, views: views)
+        let vertical = NSLayoutConstraint.constraints(withVisualFormat: "V:|-(>=0)-[cArea(height)]-(0)-|", options: .alignAllCenterX, metrics: metrics, views: views)
         
         self.view.addConstraints(horizontal)
         self.view.addConstraints(vertical)
@@ -113,6 +129,10 @@ open class HorizontalItemPreviewViewController: UIViewController {
     public func setTransition<T>(t: T) where T : WreathedDetailTransition {
         transition = t
     }
+    
+    open func titleAtIndexPath(_ indexPath: IndexPath) -> String {
+        return ""
+    }
 }
 
 extension HorizontalItemPreviewViewController: UICollectionViewDataSource {
@@ -134,6 +154,7 @@ extension HorizontalItemPreviewViewController: UICollectionViewDelegate {
     open func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         transition?.fromView = collectionView.cellForItem(at: indexPath)
         transition?.viewContainer = collectionView
+        transition?.title = titleAtIndexPath(indexPath)
     }
 }
 

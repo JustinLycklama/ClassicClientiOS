@@ -13,6 +13,7 @@ import ObjectMapper
 import Moya_ObjectMapper
 
 public protocol CCRequest {
+    associatedtype ServiceEnvelope: EnvelopeType = Envelope<ServiceResponse>
     associatedtype ServiceResponse: Mappable
     associatedtype ServiceTarget: CCTarget
     
@@ -43,9 +44,9 @@ public extension CCRequest {
 //                    let repos: [Plant] = try moyaResponse.mapArray(Plant.self)
 
                     
-                    let envelope = try moyaResponse.mapObject(Envelope<ServiceResponse>.self)
+                    let envelope = try moyaResponse.mapObject(ServiceEnvelope.self)
                                                                                     
-                    completion(Result.success(envelope.responseList ?? []))
+                    completion(Result.success(envelope.responseList as? [ServiceResponse] ?? []))
                     
                 } catch {
                     completion(Result.error(NSError(domain: "Could not deserialize", code: 1, userInfo: nil)))
@@ -62,12 +63,18 @@ public extension CCRequest {
  * Envelope
  */
 
-struct Envelope<T: Mappable>: Mappable {
-    var responseList: [T]?
+public protocol EnvelopeType : Mappable {
+    associatedtype T: Mappable
     
-    init?(map: Map) { }
+    var responseList: [T]? { get }
+}
+
+public struct Envelope<T: Mappable>: EnvelopeType {
+    public var responseList: [T]?
     
-    mutating func mapping(map: Map) {
+    public init?(map: Map) { }
+    
+    public mutating func mapping(map: Map) {
         // For now, force the selection of the first element. Won't be like that in the future.
         responseList <- map["data"]
     }
