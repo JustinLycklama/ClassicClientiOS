@@ -41,8 +41,8 @@ public class QuantityEditorView: UIView {
             self.addSubview(view)
         }
         
-        minusButton.backgroundColor = CCStyle.accentButtonBackgroundColor
-        plusButton.backgroundColor = CCStyle.accentButtonBackgroundColor
+        minusButton.backgroundColor = App.style.accentButtonBackgroundColor
+        plusButton.backgroundColor = App.style.accentButtonBackgroundColor
 
         minusButton.setTitle(" - ", for: .normal)
         plusButton.setTitle(" + ", for: .normal)

@@ -38,9 +38,9 @@ public class TwoItemFocusDisplay: UIView {
         }
         
         for label in [majorLabel, minorLabel] {
-            label.textColor = CCStyle.EnabledButtonTextColor
+            label.textColor = .white
             label.textAlignment = .center
-            label.font = CCStyle.fontWithSize(size: 16)
+            label.style(DefaultTextStyle.text)
         }
         
         majorView.addSubview(majorLabel)
@@ -67,13 +67,13 @@ public class TwoItemFocusDisplay: UIView {
             view.layer.borderColor = UIColor.clear.cgColor
         }
 
-        majorView.backgroundColor = CCStyle.majorItemColor
+        majorView.backgroundColor = App.style.primaryColor
         majorLabel.text = "Weight"
         
         minorView.backgroundColor = .clear
         minorLabel.text = "Count"
         
-        self.backgroundColor = CCStyle.minorItemColor
+        self.backgroundColor = App.style.secondaryColor
     }
     
     public func setItems(major: String, minor: String) {
