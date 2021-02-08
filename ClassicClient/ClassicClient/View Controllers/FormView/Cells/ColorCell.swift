@@ -14,7 +14,7 @@ public struct ColorField: Field {
     
     private let onUpdate: ((UIColor) -> Void)
     
-    public init(title: String, initialValue: String?, onUpdate: @escaping ((UIColor) -> Void)) {
+    public init(title: String, initialValue: UIColor?, onUpdate: @escaping ((UIColor) -> Void)) {
         self.onUpdate = onUpdate
     }
     
