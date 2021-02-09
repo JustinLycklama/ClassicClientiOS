@@ -8,20 +8,27 @@
 
 import UIKit
 
+public struct SwipeActionConfig<Type> {
+    let image: UIImage?
+    let performAction: ((Type) -> Void)
+    
+    public init(image: UIImage?, performAction: @escaping ((Type) -> Void)) {
+        self.image = image
+        self.performAction = performAction
+    }
+}
+
 public struct CellConfig<Type, Cell> {
     let configure: ((Type, Cell) -> Void)?
     let performAction: ((Type) -> Void)?
-    let itemEdited: ((Type) -> Void)?
-    let itemDeleted: ((Type) -> Void)?
+    let swipeActions: [SwipeActionConfig<Type>]
     
-    public init(configure: ((Type, Cell) -> Void)? = nil,
-                performAction: ((Type) -> Void)?,
-                itemEdited: ((Type) -> Void)? = nil,
-                itemDeleted: ((Type) -> Void)? = nil) {
+    public init(swipeActions: [SwipeActionConfig<Type>] = [],
+                configure: ((Type, Cell) -> Void)? = nil,
+                performAction: ((Type) -> Void)?) {
         self.configure = configure
         self.performAction = performAction
-        self.itemEdited = itemEdited
-        self.itemDeleted = itemDeleted
+        self.swipeActions = swipeActions
     }
 }
 
@@ -145,34 +152,50 @@ public class ActionableTableView<T,
     public func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return !isPerformActionIndex(indexPath)
     }
-    
-//    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//
-//        let actions: [UIContextualAction] = []
-//
-//        if itemConfig.itemEdited != nil {
-//
-//        }
-//
-//        if itemConfig.itemEdited != nil {
-//
-//        }
-//
-//        let remove = UIContextualAction(style: .destructive, title: "", handler: { [weak self] (action, view, completion: @escaping (Bool) -> Void) in
-//            guard let self = self else {
-//                completion(false)
-//                return
-//            }
-//
-//            self.itemConfig.itemDeleted?(self.items[indexPath.row])
-//            completion(true)
-//        })
-//
-//        remove.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-//        remove.image = ImagesResources.shared.deleteIcon
-//
-//        return UISwipeActionsConfiguration(actions: actions)
-//    }
+
+    public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        var actions: [UIContextualAction] = []
+
+        if isPerformActionIndex(indexPath) {
+            for swipeConfig in actionConfig.swipeActions {
+                let action = UIContextualAction(style: .destructive, title: "", handler: { [weak self] (action, view, completion: @escaping (Bool) -> Void) in
+                    guard let self = self else {
+                        completion(false)
+                        return
+                    }
+
+                    swipeConfig.performAction(())
+                    completion(true)
+                })
+
+                action.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+                action.image = swipeConfig.image
+                
+                actions.append(action)
+            }
+        }
+        else {
+            for swipeConfig in itemConfig.swipeActions {
+                let action = UIContextualAction(style: .destructive, title: "", handler: { [weak self] (action, view, completion: @escaping (Bool) -> Void) in
+                    guard let self = self else {
+                        completion(false)
+                        return
+                    }
+
+                    swipeConfig.performAction(self.items[indexPath.row])
+                    completion(true)
+                })
+
+                action.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
+                action.image = swipeConfig.image
+                
+                actions.append(action)
+            }
+        }
+
+        return UISwipeActionsConfiguration(actions: actions)
+    }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
