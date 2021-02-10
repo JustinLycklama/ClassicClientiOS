@@ -67,13 +67,13 @@ public class TwoItemFocusDisplay: UIView {
             view.layer.borderColor = UIColor.clear.cgColor
         }
 
-        majorView.backgroundColor = App.style.primaryColor
+        majorView.backgroundColor = Classic.style.primaryColor
         majorLabel.text = "Weight"
         
         minorView.backgroundColor = .clear
         minorLabel.text = "Count"
         
-        self.backgroundColor = App.style.secondaryColor
+        self.backgroundColor = Classic.style.secondaryColor
     }
     
     public func setItems(major: String, minor: String) {

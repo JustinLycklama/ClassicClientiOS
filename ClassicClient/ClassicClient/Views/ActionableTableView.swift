@@ -18,7 +18,7 @@ public struct SwipeActionConfig<Type> {
     }
 }
 
-public struct CellConfig<Type, Cell> {
+public struct TableCellConfig<Type, Cell> {
     let configure: ((Type, Cell) -> Void)?
     let performAction: ((Type) -> Void)?
     let swipeActions: [SwipeActionConfig<Type>]
@@ -49,33 +49,33 @@ public class ActionableTableView<T,
         }
     }
     
-    private var actionConfig: CellConfig<Void, ActionCell>
-    private var itemConfig: CellConfig<T, ItemCell>
+    private var actionConfig: TableCellConfig<Void, ActionCell>
+    private var itemConfig: TableCellConfig<T, ItemCell>
     
-    public init(actionConfig: CellConfig<Void, ActionCell>, itemConfig: CellConfig<T, ItemCell>) {
+    public init(actionConfig: TableCellConfig<Void, ActionCell>, itemConfig: TableCellConfig<T, ItemCell>) {
         self.actionConfig = actionConfig
         self.itemConfig = itemConfig
 
         super.init(frame: .zero)
         
         self.clipsToBounds = false
-        self.layer.cornerRadius = App.style.cornerRadius
+        self.layer.cornerRadius = Classic.style.cornerRadius
         self.backgroundColor = .clear
         
         let maskingView = UIView()
         maskingView.clipsToBounds = true
         
         self.addSubview(maskingView)
-        self.constrainSubviewToBounds(maskingView, withInset: UIEdgeInsets(top: -App.style.interiorMargin,
-                                                                           left: -App.style.interiorMargin,
-                                                                           bottom: -App.style.interiorMargin,
-                                                                           right: -App.style.interiorMargin))
+        self.constrainSubviewToBounds(maskingView, withInset: UIEdgeInsets(top: -Classic.style.interiorMargin,
+                                                                           left: -Classic.style.interiorMargin,
+                                                                           bottom: -Classic.style.interiorMargin,
+                                                                           right: -Classic.style.interiorMargin))
         
         maskingView.addSubview(tableView)
-        maskingView.constrainSubviewToBounds(tableView, withInset: UIEdgeInsets(top: App.style.interiorMargin,
-                                                                                left: App.style.interiorMargin,
-                                                                                bottom: App.style.interiorMargin,
-                                                                                right: App.style.interiorMargin))
+        maskingView.constrainSubviewToBounds(tableView, withInset: UIEdgeInsets(top: Classic.style.interiorMargin,
+                                                                                left: Classic.style.interiorMargin,
+                                                                                bottom: Classic.style.interiorMargin,
+                                                                                right: Classic.style.interiorMargin))
         
         // Table
         tableView.register(ActionCell.self, forCellReuseIdentifier: ActionCellIdentifier)

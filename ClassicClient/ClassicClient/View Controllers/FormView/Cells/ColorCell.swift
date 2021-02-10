@@ -44,7 +44,7 @@ class ColorCell: UITableViewCell {
         titleLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         
         self.addSubview(titleLabel)
-        self.constrainSubviewToBounds(titleLabel, onEdges: [.top, .left, .right], withInset: UIEdgeInsets(App.style.interiorMargin))
+        self.constrainSubviewToBounds(titleLabel, onEdges: [.top, .left, .right], withInset: UIEdgeInsets(Classic.style.interiorMargin))
     }
     
     required init?(coder: NSCoder) {

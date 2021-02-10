@@ -70,15 +70,15 @@ class LongStringCell: UITableViewCell {
         placeholderLabel.frame.origin = CGPoint(x: 5, y: (textView.font?.pointSize)! / 2)
         placeholderLabel.isHidden = !textView.text.isEmpty
         
-        borderView.layer.cornerRadius =  App.style.textAreaCornerRadius
+        borderView.layer.cornerRadius =  Classic.style.textAreaCornerRadius
         borderView.layer.borderWidth = 1
-        borderView.layer.borderColor =  App.style.textAreaBorderColor.cgColor
+        borderView.layer.borderColor =  Classic.style.textAreaBorderColor.cgColor
         
         borderView.addSubview(textView)
         borderView.constrainSubviewToBounds(textView, withInset: UIEdgeInsets(1))
         
         self.contentView.addSubview(borderView)
-        self.contentView.constrainSubviewToBounds(borderView, withInset: UIEdgeInsets(App.style.interiorMargin))
+        self.contentView.constrainSubviewToBounds(borderView, withInset: UIEdgeInsets(Classic.style.interiorMargin))
         
         borderView.addConstraint(.init(item: borderView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 128))
     }

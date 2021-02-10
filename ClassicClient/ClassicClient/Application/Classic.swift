@@ -10,7 +10,7 @@ import UIKit
 
 
 
-public struct App {
+public struct Classic {
     public private(set) static var style: AppStyle = DefaultStyle()
     public private(set) static var resources = AppResources()
     
@@ -18,11 +18,6 @@ public struct App {
         self.style = style
     }
 }
-
-
-
-struct DefaultStyle: AppStyle {}
-
 
 // MARK: - AppStyle
 

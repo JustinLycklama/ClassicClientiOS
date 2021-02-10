@@ -38,7 +38,7 @@ class ShortStringCell: UITableViewCell {
     var title: String = "" {
         didSet {
             valueTextField.attributedPlaceholder =
-                NSAttributedString(string: title, attributes: App.style.placeholderTextAttributes)
+                NSAttributedString(string: title, attributes: Classic.style.placeholderTextAttributes)
         }
     }
     
@@ -55,15 +55,15 @@ class ShortStringCell: UITableViewCell {
     
         valueTextField.style(DefaultTextStyle.text)
         
-        valueTextField.layer.cornerRadius = App.style.textAreaCornerRadius
+        valueTextField.layer.cornerRadius = Classic.style.textAreaCornerRadius
         valueTextField.layer.borderWidth = 1
-        valueTextField.layer.borderColor = App.style.textAreaBorderColor.cgColor
+        valueTextField.layer.borderColor = Classic.style.textAreaBorderColor.cgColor
         
         selectionStyle = .none
         valueTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         
         self.contentView.addSubview(valueTextField)
-        self.contentView.constrainSubviewToBounds(valueTextField, withInset: UIEdgeInsets(App.style.interiorMargin))
+        self.contentView.constrainSubviewToBounds(valueTextField, withInset: UIEdgeInsets(Classic.style.interiorMargin))
     }
     
     public func styleWith(_ style: TextStylable) {

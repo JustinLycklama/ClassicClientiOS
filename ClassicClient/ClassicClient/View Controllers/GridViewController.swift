@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class GridViewController: UIViewController, Loadable, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+public class GridViewController: UIView, Loadable, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     
     public var loadingView: LoadingView?
 
@@ -26,10 +26,23 @@ open class GridViewController: UIViewController, Loadable, UICollectionViewDeleg
     
     private var cellSize: CGSize = .zero
         
-    open override func viewDidLoad() {
-        super.viewDidLoad()
-
-        determineCellSize()
+    public init() {
+        super.init(frame: .zero)
+        
+        setup()
+    }
+    
+    public required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    
+//    open override func viewDidLoad() {
+//        super.viewDidLoad()
+    func setup() {
+    
+//        determineCellSize()
         
         let layout = UICollectionViewFlowLayout()
         
@@ -44,8 +57,8 @@ open class GridViewController: UIViewController, Loadable, UICollectionViewDeleg
         
         collectionView.register(UICollectionViewCell.self, forSupplementaryViewOfKind: "Any", withReuseIdentifier: StandardHeaderIdentifier)
         
-        view.addSubview(collectionView)
-        view.constrainSubviewToBounds(collectionView)
+        addSubview(collectionView)
+        constrainSubviewToBounds(collectionView)
         
         collection =  collectionView
     }
@@ -66,27 +79,27 @@ open class GridViewController: UIViewController, Loadable, UICollectionViewDeleg
         collection?.reloadData()
     }
     
-    private func determineCellSize() {        
-        let collectionSize = view.frame.size
-        let usableWidth: CGFloat = collectionSize.width - (2 * margin) - (padding * (CGFloat(numColumns) - 1))
-        
-        if (usableWidth <= 0) {
-            cellSize = .zero
-            return
-        }
-        
-        let cellWidth = usableWidth / CGFloat(numColumns)
-        
-        cellSize = CGSize(width: cellWidth, height: cellWidth)
-    }
-    
-    open override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        determineCellSize()
-        
-        collection?.reloadData()
-    }
+//    private func determineCellSize() {
+//        let collectionSize = view.frame.size
+//        let usableWidth: CGFloat = collectionSize.width - (2 * margin) - (padding * (CGFloat(numColumns) - 1))
+//
+//        if (usableWidth <= 0) {
+//            cellSize = .zero
+//            return
+//        }
+//
+//        let cellWidth = usableWidth / CGFloat(numColumns)
+//
+//        cellSize = CGSize(width: cellWidth, height: cellWidth)
+//    }
+//
+//    open override func viewWillLayoutSubviews() {
+//        super.viewWillLayoutSubviews()
+//
+//        determineCellSize()
+//
+//        collection?.reloadData()
+//    }
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: 0, height: headerHeight)

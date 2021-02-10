@@ -50,12 +50,12 @@ open class FormView: UIView {
         editItemsTable.delegate = self
         editItemsTable.dataSource = self
         
-        editItemsTable.tableFooterView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 0, height: App.style.formPadding)))
+        editItemsTable.tableFooterView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 0, height: Classic.style.formPadding)))
         editItemsTable.separatorStyle = .none
         editItemsTable.isScrollEnabled = true
         editItemsTable.bounces = false
         editItemsTable.showsVerticalScrollIndicator = true
-        editItemsTable.sectionHeaderHeight = App.style.formPadding
+        editItemsTable.sectionHeaderHeight = Classic.style.formPadding
         editItemsTable.backgroundColor = .clear
         
         editItemsTable.flashScrollIndicators()
