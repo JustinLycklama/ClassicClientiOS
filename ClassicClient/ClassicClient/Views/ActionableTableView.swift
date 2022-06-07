@@ -66,16 +66,16 @@ public class ActionableTableView<T,
         maskingView.clipsToBounds = true
         
         self.addSubview(maskingView)
-        self.constrainSubviewToBounds(maskingView, withInset: UIEdgeInsets(top: -Classic.style.interiorMargin,
-                                                                           left: -Classic.style.interiorMargin,
-                                                                           bottom: -Classic.style.interiorMargin,
-                                                                           right: -Classic.style.interiorMargin))
+        self.constrainSubviewToBounds(maskingView, withInset: UIEdgeInsets(top: -Classic.style.textInset,
+                                                                           left: -Classic.style.textInset,
+                                                                           bottom: -Classic.style.textInset,
+                                                                           right: -Classic.style.textInset))
         
         maskingView.addSubview(tableView)
-        maskingView.constrainSubviewToBounds(tableView, withInset: UIEdgeInsets(top: Classic.style.interiorMargin,
-                                                                                left: Classic.style.interiorMargin,
-                                                                                bottom: Classic.style.interiorMargin,
-                                                                                right: Classic.style.interiorMargin))
+        maskingView.constrainSubviewToBounds(tableView, withInset: UIEdgeInsets(top: Classic.style.textInset,
+                                                                                left: Classic.style.textInset,
+                                                                                bottom: Classic.style.textInset,
+                                                                                right: Classic.style.textInset))
         
         // Table
         tableView.register(ActionCell.self, forCellReuseIdentifier: ActionCellIdentifier)
@@ -85,6 +85,7 @@ public class ActionableTableView<T,
         tableView.separatorStyle = .none
         tableView.bounces = false
         tableView.clipsToBounds = false
+        tableView.showsVerticalScrollIndicator = false
         
         tableView.delegate = self
         tableView.dataSource = self

@@ -11,15 +11,22 @@ import UIKit
 public struct LongTextField: Field {
     public let identifier = "LongTextCell"
     public let cellClass: UITableViewCell.Type = LongStringCell.self
+
+    public let height: CGFloat = 88
     
     private let title: String
     private let initialValue: String?
     private let onUpdate: ((String) -> Void)
+
+    private let textStyle: NewTextStyle?
+    private let placeholderTextStyle: NewTextStyle?
     
-    public init(title: String, initialValue: String?, onUpdate: @escaping ((String) -> Void)) {
+    public init(title: String, initialValue: String?, style: NewTextStyle? = nil, placeholderStyle: NewTextStyle? = nil, onUpdate: @escaping ((String) -> Void)) {
         self.title = title
         self.initialValue = initialValue
         self.onUpdate = onUpdate
+        self.textStyle = style
+        self.placeholderTextStyle = placeholderStyle
     }
     
     public func configureCell(_ cell: UITableViewCell) {
@@ -27,6 +34,11 @@ public struct LongTextField: Field {
             longTextCell.title = title
             longTextCell.initialValue = initialValue
             longTextCell.onUpdate = onUpdate
+            
+            if let style = textStyle, let placeholderStyle = placeholderTextStyle {
+                longTextCell.textView.style(style)
+                longTextCell.placeholderLabel.style(placeholderStyle)
+            }
         }
     }
 }
@@ -58,35 +70,41 @@ class LongStringCell: UITableViewCell {
         
         selectionStyle = .none
 
-        textView.style(DefaultTextStyle.text)
+        backgroundColor = .clear
+        borderView.backgroundColor = .clear
+        
+        textView.style(DefaultTextStyle)
         
         textView.delegate = self
+        textView.showsVerticalScrollIndicator = false
         
         placeholderLabel.text = "Enter some text..."
-        placeholderLabel.style(DefaultTextStyle.text)
+        placeholderLabel.style(DefaultTextStyle)
         placeholderLabel.sizeToFit()
         
         textView.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 5, y: (textView.font?.pointSize)! / 2)
         placeholderLabel.isHidden = !textView.text.isEmpty
         
-        borderView.layer.cornerRadius =  Classic.style.textAreaCornerRadius
         borderView.layer.borderWidth = 1
+        borderView.layer.cornerRadius =  Classic.style.textAreaCornerRadius
         borderView.layer.borderColor =  Classic.style.textAreaBorderColor.cgColor
         
         borderView.addSubview(textView)
         borderView.constrainSubviewToBounds(textView, withInset: UIEdgeInsets(1))
         
-        self.contentView.addSubview(borderView)
-        self.contentView.constrainSubviewToBounds(borderView, withInset: UIEdgeInsets(Classic.style.interiorMargin))
+//        borderView.addConstraint(.init(item: textView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 128))
+
         
-        borderView.addConstraint(.init(item: borderView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 128))
+        self.contentView.addSubview(borderView)
+        self.contentView.constrainSubviewToBounds(borderView,  onEdges: [.top, .bottom], withInset: UIEdgeInsets(Classic.style.elementPadding))
+        self.contentView.constrainSubviewToBounds(borderView, onEdges: [.left, .right])
     }
     
-    public func styleWith(textStyle: TextStylable, placeholderStyle: TextStylable) {
-        textView.style(textStyle)
-        placeholderLabel.style(placeholderStyle)
-    }
+//    public func styleWith(textStyle: TextStylable, placeholderStyle: TextStylable) {
+//        textView.style(textStyle)
+//        placeholderLabel.style(placeholderStyle)
+//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

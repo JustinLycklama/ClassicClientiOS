@@ -40,7 +40,7 @@ public class TwoItemFocusDisplay: UIView {
         for label in [majorLabel, minorLabel] {
             label.textColor = .white
             label.textAlignment = .center
-            label.style(DefaultTextStyle.text)
+            label.style(DefaultTextStyle)
         }
         
         majorView.addSubview(majorLabel)

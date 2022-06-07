@@ -63,7 +63,7 @@ class ListCell: UITableViewCell {
         let stack = UIStackView()
         stack.axis = .horizontal
         stack.distribution = .fillProportionally
-        stack.spacing = Classic.style.interiorPadding
+        stack.spacing = Classic.style.elementPadding
         
         titleLabel.setContentHuggingPriority(.required, for: .horizontal)
         titleLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -84,10 +84,10 @@ class ListCell: UITableViewCell {
         stackContainer.layer.borderColor = Classic.style.textAreaBorderColor.cgColor
         
         stackContainer.addSubview(stack)
-        stackContainer.constrainSubviewToBounds(stack, withInset: UIEdgeInsets(Classic.style.interiorMargin))
+        stackContainer.constrainSubviewToBounds(stack, withInset: UIEdgeInsets(Classic.style.textInset))
         
         self.addSubview(stackContainer)
-        self.constrainSubviewToBounds(stackContainer, withInset: UIEdgeInsets(Classic.style.interiorMargin))
+        self.constrainSubviewToBounds(stackContainer, withInset: UIEdgeInsets(Classic.style.textInset))
     }
     
     required init?(coder: NSCoder) {

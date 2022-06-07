@@ -13,7 +13,7 @@ import UIKit
 public struct Classic {
     public private(set) static var style: AppStyle = DefaultStyle()
     public private(set) static var resources = AppResources()
-    
+
     public static func setAppStyle(_ style: AppStyle) {
         self.style = style
     }

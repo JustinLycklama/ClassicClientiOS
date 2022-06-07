@@ -13,6 +13,15 @@ public protocol Field {
     var cellClass: UITableViewCell.Type { get }
     
     func configureCell(_ cell: UITableViewCell)
+    var height: CGFloat { get }
+}
+
+extension Field {
+    public var height: CGFloat { 44 }
+}
+
+public protocol ModifiableFields: AnyObject {
+    func modifiableFields() -> [Field]
 }
 
 open class FormView: UIView {
@@ -22,7 +31,11 @@ open class FormView: UIView {
     public override var intrinsicContentSize: CGSize {
         setNeedsLayout()
         layoutIfNeeded()
-        return editItemsTable.contentSize
+//        return editItemsTable.contentSize
+        
+        return fields.reduce(CGSize.zero) { (previous: CGSize, field: Field) -> CGSize in
+            return CGSize(width: editItemsTable.contentSize.width, height: previous.height + field.height)
+        }
     }
     
     let fields: [Field]
@@ -41,7 +54,8 @@ open class FormView: UIView {
     
     func setup() {
         
-        backgroundColor = .white
+        backgroundColor = .clear
+        editItemsTable.backgroundColor = .clear
         
         for field in fields {
             editItemsTable.register(field.cellClass, forCellReuseIdentifier: field.identifier)
@@ -50,21 +64,24 @@ open class FormView: UIView {
         editItemsTable.delegate = self
         editItemsTable.dataSource = self
         
-        editItemsTable.tableFooterView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 0, height: Classic.style.formPadding)))
+        editItemsTable.tableFooterView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 0, height: 0)))
         editItemsTable.separatorStyle = .none
         editItemsTable.isScrollEnabled = true
         editItemsTable.bounces = false
-        editItemsTable.showsVerticalScrollIndicator = true
-        editItemsTable.sectionHeaderHeight = Classic.style.formPadding
+        editItemsTable.showsVerticalScrollIndicator = false
+        editItemsTable.showsHorizontalScrollIndicator = false
+        editItemsTable.sectionHeaderHeight = 0
         editItemsTable.backgroundColor = .clear
         
-        editItemsTable.flashScrollIndicators()
+        // Used in calculation of editItemsTable.contentSizeeditItemsTable.contentSize.
+//        editItemsTable.estimatedRowHeight = UITableView.automaticDimension
+        
+//        editItemsTable.flashScrollIndicators()
         
         self.addSubview(editItemsTable)
         self.constrainSubviewToBounds(editItemsTable)
         
         editItemsTable.reloadData()
-        editItemsTable.layoutIfNeeded()
         
         layoutIfNeeded()
         invalidateIntrinsicContentSize()
@@ -88,6 +105,15 @@ extension FormView: UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return UIView()
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let field = fields[indexPath.row]
+        return field.height
     }
 }
 

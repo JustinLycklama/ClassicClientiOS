@@ -14,15 +14,13 @@ public protocol MetricsStyle {
     var topMargin: CGFloat { get }
     var topPadding: CGFloat { get }
     
-    var interiorMargin: CGFloat { get }
-    var interiorPadding: CGFloat { get }
+    var textInset: CGFloat { get }
+
+    var elementMargin: CGFloat { get }
+    var elementPadding: CGFloat { get }
     
     var cornerRadius: CGFloat { get }
-    
-    // Forms
-    var formPadding: CGFloat { get }
-    var formMargin: CGFloat { get }
-    
+        
     // Text Area
     var textAreaCornerRadius: CGFloat { get }
 }
@@ -34,6 +32,7 @@ public protocol ColorStyle {
     
     // Views
     var baseBackgroundColor: UIColor { get }
+    var shadowColor: UIColor { get }
     
     // Buttons
     var acceptButtonBackgroundColor: UIColor { get }
@@ -56,58 +55,83 @@ public protocol FontStyle {
 
 // MARK: - Extensions
 
-public protocol TextStylable {
-    var fontName: String { get }
-    var textColor: UIColor { get }
-    var size: CGFloat { get }
+//public protocol TextStylable {
+//    var font: UIFont { get }
+//    var color: UIColor { get }
+////    var size: CGFloat { get }
+//}
+//
+//public struct
+
+public struct NewTextStyle {
+    let font: UIFont
+    let color: UIColor
+    
+    public init(font: UIFont, color: UIColor) {
+        self.font = font
+        self.color = color
+    }
+    
+    public static func + (lhs: NewTextStyle, rhs: UIColor) -> NewTextStyle {
+        return NewTextStyle(font: lhs.font, color: rhs)
+    }
+    
+    public var asAttributes: [NSAttributedString.Key : Any] {
+        return [NSAttributedString.Key.font : font,
+                NSAttributedString.Key.foregroundColor : color]
+    }
 }
 
-public enum DefaultTextStyle: String, TextStylable {
-    case title = "AvenirNext-DemiBold" //BodoniSvtyTwoITCTT-BookIta"
-    case text = "Avenir-Light"
-    
-    public var fontName: String {
-        rawValue
-    }
-    
-    public var textColor: UIColor {
-        .black
-    }
-    
-    public var size: CGFloat {
-        16
-    }
-}
+public let DefaultTextStyle = NewTextStyle(font: UIFont.systemFont(ofSize: 15), color: .black)
 
-public extension UIFont {
-    static func fromStyle(style: TextStylable) -> UIFont {
-        return UIFont.init(name: style.fontName, size: style.size) ?? UIFont.init()
-    }
-}
+
+//public enum DefaultTextStyle: String, TextStylable {
+//    case title = "AvenirNext-DemiBold" //BodoniSvtyTwoITCTT-BookIta"
+//    case text = "Avenir-Light"
+//
+//    public var fontName: String {
+//        rawValue
+//    }
+//
+//    public var textColor: UIColor {
+//        .black
+//    }
+//
+//    public var size: CGFloat {
+//        16
+//    }
+//}
+
+//public extension UIFont {
+//    static func fromStyle(style: TextStylable) -> UIFont {
+//        return UIFont.init(name: style.fontName, size: style.size) ?? UIFont.init()
+//    }
+//}
 
 extension UILabel {
-    public func style(_ style: TextStylable) {
-        self.font = UIFont.fromStyle(style: style)
-        self.textColor = style.textColor
+    public func style(_ style: NewTextStyle) {
+        self.font = style.font
+        self.textColor = style.color
     }
 }
 
 extension UITextView {
-    public func style(_ style: TextStylable) {
-        self.font = UIFont.fromStyle(style: style)
-        self.textColor = style.textColor
+    public func style(_ style: NewTextStyle) {
+        self.font = style.font
+        self.textColor = style.color
     }
 }
 
 extension UITextField {
-    public func style(_ style: TextStylable) {
-        self.font = UIFont.fromStyle(style: style)
-        self.textColor = style.textColor
+    public func style(_ style: NewTextStyle) {
+        self.backgroundColor = .white
+        self.font = style.font
+        self.textColor = style.color
         
         self.leftViewMode = .always
-        self.leftView = UIView(frame: CGRect(x: bounds.origin.x + Classic.style.interiorPadding,
+        self.leftView = UIView(frame: CGRect(x: bounds.origin.x + Classic.style.textInset,
                                              y: bounds.origin.y,
-                                             width: bounds.size.width - Classic.style.interiorPadding,
+                                             width: bounds.size.width - Classic.style.textInset,
                                              height: bounds.size.height))
     }
 }

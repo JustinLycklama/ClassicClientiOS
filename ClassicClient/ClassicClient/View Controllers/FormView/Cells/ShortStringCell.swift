@@ -9,6 +9,7 @@
 import UIKit
 
 public struct ShortTextField: Field {
+    
     public let identifier = "ShortTextCell"
     public let cellClass: UITableViewCell.Type = ShortStringCell.self
     
@@ -16,10 +17,13 @@ public struct ShortTextField: Field {
     private let initialValue: String?
     private let onUpdate: ((String) -> Void)
     
-    public init(title: String, initialValue: String?, onUpdate: @escaping ((String) -> Void)) {
+    private let textStyle: NewTextStyle?
+    
+    public init(title: String, initialValue: String?, style: NewTextStyle? = nil, onUpdate: @escaping ((String) -> Void)) {
         self.title = title
         self.initialValue = initialValue
         self.onUpdate = onUpdate
+        self.textStyle = style
     }
     
     public func configureCell(_ cell: UITableViewCell) {
@@ -27,6 +31,10 @@ public struct ShortTextField: Field {
             shortTextCell.title = title
             shortTextCell.initialValue = initialValue
             shortTextCell.onUpdate = onUpdate
+            
+            if let style = textStyle {
+                shortTextCell.valueTextField.style(style)
+            }
         }
     }
 }
@@ -53,7 +61,9 @@ class ShortStringCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-        valueTextField.style(DefaultTextStyle.text)
+        backgroundColor = .clear
+        
+        valueTextField.style(DefaultTextStyle)
         
         valueTextField.layer.cornerRadius = Classic.style.textAreaCornerRadius
         valueTextField.layer.borderWidth = 1
@@ -63,11 +73,8 @@ class ShortStringCell: UITableViewCell {
         valueTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         
         self.contentView.addSubview(valueTextField)
-        self.contentView.constrainSubviewToBounds(valueTextField, withInset: UIEdgeInsets(Classic.style.interiorMargin))
-    }
-    
-    public func styleWith(_ style: TextStylable) {
-        valueTextField.style(style)
+        self.contentView.constrainSubviewToBounds(valueTextField, onEdges: [.top, .bottom], withInset: UIEdgeInsets(Classic.style.elementPadding))
+        self.contentView.constrainSubviewToBounds(valueTextField, onEdges: [.left, .right])
     }
     
     required init?(coder: NSCoder) {

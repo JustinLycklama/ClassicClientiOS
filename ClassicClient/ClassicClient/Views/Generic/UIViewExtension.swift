@@ -9,6 +9,11 @@
 import UIKit
 
 public extension UIView {
+    func addAndConstrainSubview(_ subview: UIView) {
+        self.addSubview(subview)
+        self.constrainSubviewToBounds(subview)
+    }
+    
     func constrainSubviewToBounds(_ subview: UIView, onEdges edges: UIRectEdge = .all, withInset inset: UIEdgeInsets = UIEdgeInsets.zero) {
         // subview must be a subview of our cell to be constrained
         if self.subviews.contains(subview) == false {

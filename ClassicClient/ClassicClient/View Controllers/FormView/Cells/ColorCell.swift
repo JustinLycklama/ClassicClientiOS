@@ -11,7 +11,7 @@ import UIKit
 public struct ColorField: Field {
     public let identifier = "ColorCell"
     public let cellClass: UITableViewCell.Type = ColorCell.self
-    
+        
     private let onUpdate: ((UIColor) -> Void)
     
     public init(title: String, initialValue: UIColor?, onUpdate: @escaping ((UIColor) -> Void)) {
@@ -44,7 +44,7 @@ class ColorCell: UITableViewCell {
         titleLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
         
         self.addSubview(titleLabel)
-        self.constrainSubviewToBounds(titleLabel, onEdges: [.top, .left, .right], withInset: UIEdgeInsets(Classic.style.interiorMargin))
+        self.constrainSubviewToBounds(titleLabel, onEdges: [.top, .left, .right], withInset: UIEdgeInsets(Classic.style.textInset))
     }
     
     required init?(coder: NSCoder) {
