@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, LoginUpdateDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-
-        let contentViewController = CitiesViewController()
+        
+        let contentViewController = UIViewController()
         let navController = UINavigationController(rootViewController: contentViewController)
         
         LoginViewModel.sharedInstance.subscribeToUpdates(delegate: self)
@@ -35,8 +35,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, LoginUpdateDelegate {
             
             // Present the launch screen to avoid any visible flashes when presenting view controller
             window.addSubview(launch.view)
-            window.constrainSubviewToBounds(launch.view)
-            
+            window.constrainView(launch.view)
+
             loginViewController = LoginViewController()
             loginViewController?.modalPresentationStyle = .fullScreen
             

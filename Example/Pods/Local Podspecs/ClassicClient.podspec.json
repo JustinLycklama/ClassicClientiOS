@@ -1,7 +1,7 @@
 {
   "name": "ClassicClient",
-  "version": "0.1.0",
-  "summary": "A short description of ClassicClient.",
+  "version": "0.2.0",
+  "summary": "A standard set of UIKit utility objects I reuse for most projects",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://github.com/Justin Lycklama/ClassicClient",
   "license": {
@@ -13,25 +13,14 @@
   },
   "source": {
     "git": "https://github.com/Justin Lycklama/ClassicClient.git",
-    "tag": "0.1.0"
+    "tag": "0.2.0"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "13.0"
   },
   "source_files": "ClassicClient/ClassicClient/**/*.swift",
   "resources": [
     "ClassicClient/ClassicClient/*.xcassets",
     "ClassicClient/ClassicClient/**/*.{xib}"
-  ],
-  "dependencies": {
-    "Moya": [
-      "~> 14.0"
-    ],
-    "Moya-ObjectMapper": [
-      "~> 2.9"
-    ],
-    "Result": [
-      "~> 5.0"
-    ]
-  }
+  ]
 }

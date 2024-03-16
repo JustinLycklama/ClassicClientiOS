@@ -9,7 +9,19 @@
 import UIKit
 import ClassicClient
 
-class ItemService: NSObject, FakeServerProtocol {
-    typealias T = Item
-    let dataFileName = "items"
+struct Item: Codable, Equatable {
+    public var id: Int
+    public var name: String
+    public var count: Int
+    public var kgPerUnit: CGFloat
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
+
+
+//class ItemService: NSObject, FakeServerProtocol {
+//    typealias T = Item
+//    let dataFileName = "items"
+//}

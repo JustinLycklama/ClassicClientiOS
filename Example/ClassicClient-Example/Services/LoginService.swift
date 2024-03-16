@@ -9,7 +9,7 @@
 import UIKit
 import ClassicClient
 
-class LoginService: NSObject, FakeServerProtocol {
-    typealias T = String
-    let dataFileName = "success"
-}
+//class LoginService: NSObject, FakeServerProtocol {
+//    typealias T = String
+//    let dataFileName = "success"
+//}

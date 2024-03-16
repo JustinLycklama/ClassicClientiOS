@@ -9,7 +9,14 @@
 import UIKit
 import ClassicClient
 
-class LocationService: NSObject, FakeServerProtocol {
-    typealias T = Location
-    let dataFileName = "locations"
+struct Location: Codable {
+    public var id: Int
+    public var locationName: String
+    public var cityName: String
+    public var address: String
 }
+
+//class LocationService: NSObject, FakeServerProtocol {
+//    typealias T = Location
+//    let dataFileName = "locations"
+//}
