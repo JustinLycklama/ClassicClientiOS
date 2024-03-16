@@ -8,14 +8,14 @@
 
 import Foundation
 
-struct FormData {
+public struct FormData {
     let fieldName: String
     let fileName: String
     let mimeType: String
     let fileData: Data
 }
 
-class RequestParams {
+public class RequestParams {
 
     let baseURL: URL
     
@@ -51,7 +51,7 @@ class RequestParams {
     // Will probably run in to some issues trying to cache using SimpleService
     var shouldCache: Bool { false }
     
-    init(baseUrl: URL,
+    public init(baseUrl: URL,
          path: String,
          method: HTTPMethod = .get,
          headers: [String: String]? = nil,
@@ -71,7 +71,7 @@ class RequestParams {
 }
 
 extension RequestParams: Hashable, Equatable {
-    func hash(into hasher: inout Hasher) {
+    public func hash(into hasher: inout Hasher) {
         
         hasher.combine(path)
         hasher.combine(headers)
@@ -87,7 +87,7 @@ extension RequestParams: Hashable, Equatable {
         hasher.combine(data)
     }
     
-    static func == (lhs: RequestParams, rhs: RequestParams) -> Bool {
+    public static func == (lhs: RequestParams, rhs: RequestParams) -> Bool {
         
         let lhsData: Data?
         let rhsData: Data?

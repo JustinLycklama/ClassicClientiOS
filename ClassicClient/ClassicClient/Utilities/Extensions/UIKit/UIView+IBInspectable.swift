@@ -11,7 +11,7 @@ import UIKit
 extension UIView {
     
     @IBInspectable
-    var cornerRadius: CGFloat {
+    public var cornerRadius: CGFloat {
         get {
             return layer.cornerRadius
         }
@@ -21,7 +21,7 @@ extension UIView {
     }
     
     @IBInspectable
-    var borderWidth: CGFloat {
+    public var borderWidth: CGFloat {
         get {
             return layer.borderWidth
         }
@@ -31,7 +31,7 @@ extension UIView {
     }
     
     @IBInspectable
-    var borderColor: UIColor? {
+    public var borderColor: UIColor? {
         get {
             if let color = layer.borderColor {
                 return UIColor(cgColor: color)
@@ -48,7 +48,7 @@ extension UIView {
     }
     
     @IBInspectable
-    var shadowRadius: CGFloat {
+    public var shadowRadius: CGFloat {
         get {
             return layer.shadowRadius
         }
@@ -58,7 +58,7 @@ extension UIView {
     }
     
     @IBInspectable
-    var shadowOpacity: Float {
+    public var shadowOpacity: Float {
         get {
             return layer.shadowOpacity
         }
@@ -68,7 +68,7 @@ extension UIView {
     }
     
     @IBInspectable
-    var shadowOffset: CGSize {
+    public var shadowOffset: CGSize {
         get {
             return layer.shadowOffset
         }
@@ -78,7 +78,7 @@ extension UIView {
     }
     
     @IBInspectable
-    var shadowColor: UIColor? {
+    public var shadowColor: UIColor? {
         get {
             if let color = layer.shadowColor {
                 return UIColor(cgColor: color)

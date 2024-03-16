@@ -115,7 +115,7 @@ extension UIView {
         return constrains
     }
     
-    func centerSubview(_ subview: UIView,
+    public func centerSubview(_ subview: UIView,
                        verticalOffset: CGFloat = 0,
                        horizontalOffset: CGFloat = 0,
                        requiresSizeConstraints: Bool = true) {
@@ -141,9 +141,15 @@ extension UIView {
         NSLayoutConstraint.activate(constraints)
     }
     
-    func constrainViewSafeArea(_ view: UIView,
+    public func constrainViewSafeArea(_ view: UIView,
                                onEdges edges: [Edge] = .all,
                                withInsets insets: UIEdgeInsets = .zero) {
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        if !subviews.contains(view) {
+            self.addSubview(view)
+        }
         
         var constraints: [NSLayoutConstraint] = []
         
@@ -165,12 +171,11 @@ extension UIView {
             constraints.append(view.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -insets.right))
         }
         
-        view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate(constraints)
     }
     
     @discardableResult
-    func sized(_ size: CGSize, withPriority priority: UILayoutPriority = .required) -> Self {
+    public func sized(_ size: CGSize, withPriority priority: UILayoutPriority = .required) -> Self {
         let width = widthAnchor.constraint(equalToConstant: size.width)
         width.priority = priority
         
@@ -235,7 +240,7 @@ extension UIView {
 // MARK: Round Corners
 
 extension UIView {
-    func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
+    public func roundCorners(_ corners: UIRectCorner, radius: CGFloat) {
         clipsToBounds = true
         layer.cornerRadius = radius
         layer.maskedCorners = CACornerMask(rawValue: corners.rawValue)
@@ -244,7 +249,7 @@ extension UIView {
 
 // MARK: Animate Border
 extension UIView {
-    func animateBorderColor(toColor: UIColor, duration: Double) {
+    public func animateBorderColor(toColor: UIColor, duration: Double) {
         let animation = CABasicAnimation(keyPath: "borderColor")
         animation.fromValue = layer.borderColor
         animation.toValue = toColor.cgColor

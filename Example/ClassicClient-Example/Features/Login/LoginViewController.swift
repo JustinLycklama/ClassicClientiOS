@@ -24,8 +24,11 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "Wallpaper")
+        imageView.image = UIImage(named: "desert")
         imageView.contentMode = .scaleAspectFit
+        
+        view.borderColor = .red
+        view.borderWidth = 2
         
         view.constrainView(imageView)
 //

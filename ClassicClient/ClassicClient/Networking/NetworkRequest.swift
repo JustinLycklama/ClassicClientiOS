@@ -9,7 +9,7 @@
 import CoreText
 import Foundation
 
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
     case options = "OPTIONS"
     case get     = "GET"
     case head    = "HEAD"
@@ -21,11 +21,11 @@ enum HTTPMethod: String {
     case connect = "CONNECT"
 }
 
-protocol Cancellable {
+public protocol Cancellable {
     func cancel()
 }
 
-extension Cancellable {
+public extension Cancellable {
     func store(inList list: inout [Cancellable]) {
         list.append(self)
     }
@@ -33,12 +33,12 @@ extension Cancellable {
 
 extension URLSessionDataTask: Cancellable {}
 
-struct Exception: Codable {
+public struct Exception: Codable {
     let exception: String
     let exc: String?
 }
 
-enum ServiceError: Error {
+public enum ServiceError: Error {
     case couldNotParseURL
     case failedInTransport(_ error: Error)
     case failedWithMessage(_ message: String)
@@ -50,18 +50,18 @@ enum ServiceError: Error {
 }
 
 
-struct ResponseWrapper<T: Codable>: Codable {
+public struct ResponseWrapper<T: Codable>: Codable {
     let message: T
 }
 
 // Empty
-struct EmptyResponse: Codable {}
+public struct EmptyResponse: Codable {}
 
-struct OptionalCodable<T>: Codable where T: Codable {
+public struct OptionalCodable<T>: Codable where T: Codable {
     
     let value: T?
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         
         if let object = try? container.decode(T.self) {
@@ -74,7 +74,7 @@ struct OptionalCodable<T>: Codable where T: Codable {
     }
 }
 
-class NetworkRequest<T: Codable> {
+public class NetworkRequest<T: Codable> {
 
     private let params: RequestParams
     private let logger: AppLogger

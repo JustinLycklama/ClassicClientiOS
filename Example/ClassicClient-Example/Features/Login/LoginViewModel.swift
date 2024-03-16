@@ -9,52 +9,29 @@
 import UIKit
 import ClassicClient
 
-protocol LoginUpdateDelegate: AnyObject {
-    func LoginStateUpdated(loggedIn: Bool)
-}
-
 class LoginViewModel {
     public static let sharedInstance = LoginViewModel()
     
-    private var isLoggedIn: Bool
-    private var delegates = [LoginUpdateDelegate]()
-    
-//    private let service: LoginService
+    private let service: LoginService
     
     init() {
-        isLoggedIn = false
-//        loginService = LoginService()
+        service = LoginService()
     }
     
     public func login() {
-//        loginService.request { [weak self] (result: Result<String>) in
-//            // Take some shortcuts here, assume the login/logout request always succeeds
-//            self?.isLoggedIn = true
-//            self?.notifyDelegates()
-//        }
+        service
+            .login()
+            .doRequest { result in
+                switch result {
+                case .success(let user):
+                    break
+                case .failure(let error):
+                    break
+                }
+            }
     }
     
     public func logout() {
-//        loginService.request { [weak self] (result: Result<String>) in
-//            // Take some shortcuts here, assume the login/logout request always succeeds
-//            self?.isLoggedIn = false
-//            self?.notifyDelegates()
-//        }
-    }
-    
-    private func notifyDelegates() {
-        delegates.forEach { (delegate: LoginUpdateDelegate) in
-            delegate.LoginStateUpdated(loggedIn: isLoggedIn)
-        }
-    }
-    
-    public func subscribeToUpdates(delegate: LoginUpdateDelegate) {
-        delegates.append(delegate)
-    }
-    
-    public func unsubscribeFromUpdates(delegate: LoginUpdateDelegate) {
-        if let index = delegates.firstIndex(where: { $0 === delegate }) {
-            delegates.remove(at: index)
-        }
+
     }
 }

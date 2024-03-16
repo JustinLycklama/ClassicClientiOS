@@ -6,10 +6,14 @@
 //  Copyright © 2020 Justin Lycklama. All rights reserved.
 //
 
-import UIKit
 import ClassicClient
 
-//class LoginService: NSObject, FakeServerProtocol {
-//    typealias T = String
-//    let dataFileName = "success"
-//}
+struct User: Codable {
+    let id: String
+}
+
+class LoginService {
+    func login() -> Requester<User> {
+        return MockRequester(User(id: "123"))
+    }
+}

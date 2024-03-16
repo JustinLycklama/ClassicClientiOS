@@ -9,7 +9,7 @@
 import UIKit
 import ClassicClient
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate, LoginUpdateDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
     var loginViewController: LoginViewController?
 
@@ -19,41 +19,43 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, LoginUpdateDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
-        let contentViewController = UIViewController()
+        let contentViewController = HomePageViewController()
         let navController = UINavigationController(rootViewController: contentViewController)
         
-        LoginViewModel.sharedInstance.subscribeToUpdates(delegate: self)
         
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             
+            
+            
             window.rootViewController = navController
+            
             let launch = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()!
             
             self.window = window
             window.makeKeyAndVisible()
             
             // Present the launch screen to avoid any visible flashes when presenting view controller
-            window.addSubview(launch.view)
-            window.constrainView(launch.view)
-
-            loginViewController = LoginViewController()
-            loginViewController?.modalPresentationStyle = .fullScreen
-            
-            //Using DispatchQueue to prevent "Unbalanced calls to begin/end appearance transitions"
-            DispatchQueue.global().async {
-               // Bounce back to the main thread to update the UI
-               DispatchQueue.main.async {
-                self.window?.rootViewController?.present(self.loginViewController!, animated: false, completion: {
-
-                       UIView.animate(withDuration: 1.5, animations: {
-                           launch.view.alpha = 0
-                       }, completion: { (_) in
-                           launch.view.removeFromSuperview()
-                       })
-                   })
-               }
-            }
+//            window.addSubview(launch.view)
+//            window.constrainView(launch.view)
+//
+//            loginViewController = LoginViewController()
+//            loginViewController?.modalPresentationStyle = .fullScreen
+//            
+//            //Using DispatchQueue to prevent "Unbalanced calls to begin/end appearance transitions"
+//            DispatchQueue.global().async {
+//               // Bounce back to the main thread to update the UI
+//               DispatchQueue.main.async {
+//                self.window?.rootViewController?.present(self.loginViewController!, animated: false, completion: {
+//
+//                       UIView.animate(withDuration: 1.5, animations: {
+//                           launch.view.alpha = 0
+//                       }, completion: { (_) in
+//                           launch.view.removeFromSuperview()
+//                       })
+//                   })
+//               }
+//            }
         }
     }
 
@@ -63,8 +65,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, LoginUpdateDelegate {
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not neccessarily discarded (see `application:didDiscardSceneSessions` instead).
-        
-        LoginViewModel.sharedInstance.unsubscribeFromUpdates(delegate: self)
     }
 
     @available(iOS 13.0, *)
@@ -93,25 +93,25 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate, LoginUpdateDelegate {
     }
 
     // MARK: LoginUpdateDelegate
-    func LoginStateUpdated(loggedIn: Bool) {
-        if loggedIn && loginViewController != nil {
-            window?.rootViewController?.dismiss(animated: true, completion: nil)
-            loginViewController = nil
-        } else if !loggedIn && loginViewController == nil {
-            presentNewLoginScreen()
-        }
-    }
+//    func LoginStateUpdated(loggedIn: Bool) {
+//        if loggedIn && loginViewController != nil {
+//            window?.rootViewController?.dismiss(animated: true, completion: nil)
+//            loginViewController = nil
+//        } else if !loggedIn && loginViewController == nil {
+//            presentNewLoginScreen()
+//        }
+//    }
         
-    private func presentNewLoginScreen() {
-        loginViewController = LoginViewController()
-        loginViewController?.modalPresentationStyle = .fullScreen
-        if #available(iOS 13.0, *) {
-            loginViewController?.isModalInPresentation = true
-        } else {
-            // Fallback on earlier versions
-        }
-
-        window?.rootViewController?.present(loginViewController!, animated: true, completion: nil)
-    }
+//    private func presentNewLoginScreen() {
+//        loginViewController = LoginViewController()
+//        loginViewController?.modalPresentationStyle = .fullScreen
+//        if #available(iOS 13.0, *) {
+//            loginViewController?.isModalInPresentation = true
+//        } else {
+//            // Fallback on earlier versions
+//        }
+//
+//        window?.rootViewController?.present(loginViewController!, animated: true, completion: nil)
+//    }
 }
 

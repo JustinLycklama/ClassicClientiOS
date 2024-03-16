@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Requester<T: Codable> {
+open class Requester<T: Codable> {
 
     let logger: AppLogger = .shared
     
@@ -16,13 +16,13 @@ class Requester<T: Codable> {
         
     var mapSuccess: ((T) -> Swift.Result<T, ServiceError>) = { value in .success(value) }
     
-    init(_ params: RequestParams) {
+    public init(_ params: RequestParams) {
         self.params = params
     }
     
     @discardableResult
     /// Performs request and returns to the main thread
-    func doRequest(completion: @escaping (Swift.Result<T, ServiceError>) -> Void) -> Cancellable? {
+    open func doRequest(completion: @escaping (Swift.Result<T, ServiceError>) -> Void) -> Cancellable? {
         let request = NetworkRequest<T>(params: params)
         return request.performRequest() { result, data in
                     

@@ -40,6 +40,7 @@
 		7DF3E37A2BA555620058B5B6 /* Requester.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Requester.swift; sourceTree = "<group>"; };
 		7DF3E37B2BA555BF0058B5B6 /* RequestParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestParams.swift; sourceTree = "<group>"; };
 		7DF3E37C2BA5585D0058B5B6 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		7DF3E3832BA64D8E0058B5B6 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		7DF9E2A024FAE7B600FD60A3 /* CCMoyaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCMoyaService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +151,7 @@
 				7DF3E35A2BA542760058B5B6 /* UIEdgeInsets+Extensions.swift */,
 				7DF3E36A2BA547C20058B5B6 /* UINavigationController+Extensions.swift */,
 				7DF3E37C2BA5585D0058B5B6 /* UIImageView+Extensions.swift */,
+				7DF3E3832BA64D8E0058B5B6 /* UIColor+Extensions.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
