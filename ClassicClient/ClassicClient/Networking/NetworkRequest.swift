@@ -43,10 +43,6 @@ public enum ServiceError: Error {
     case failedInTransport(_ error: Error)
     case failedWithMessage(_ message: String)
     case unableToDecodeResponse
-    case couldNotMapResponse
-    
-    // Example: If the http request was a success, but the object itself has a message "Request Failed"
-    case returnedObjectDenotesFailure
 }
 
 

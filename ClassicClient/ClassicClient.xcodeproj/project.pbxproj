@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		7D05F0932BB3BD4500F9CC23 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		7D1090722B7AE79D008C8D75 /* SelfSizeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfSizeTableView.swift; sourceTree = "<group>"; };
 		7D2A1A3824FB55A600EEC4D2 /* ResourceSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceSingleton.swift; sourceTree = "<group>"; };
 		7D8362822423DBFE00B039E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 			children = (
 				7DF3E3592BA5424D0058B5B6 /* Extensions */,
 				7DF3E3792BA553940058B5B6 /* AppLogger.swift */,
+				7D05F0932BB3BD4500F9CC23 /* AlertManager.swift */,
 				7DF3E35B2BA542D10058B5B6 /* Indentifiable.swift */,
 				7DF3E3682BA546FA0058B5B6 /* LoadingState.swift */,
 			);
