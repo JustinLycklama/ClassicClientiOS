@@ -8,11 +8,11 @@
 
 import UIKit
 
-class SelfSizedTableView: UITableView {
+open class SelfSizedTableView: UITableView {
     
     var onContentSizeUpdate: ((CGSize) -> Void)?
     
-    override var contentSize: CGSize {
+    open override var contentSize: CGSize {
         didSet {
             invalidateIntrinsicContentSize()
             setNeedsLayout()
@@ -20,13 +20,13 @@ class SelfSizedTableView: UITableView {
         }
     }
 
-    override func reloadData() {
+    open override func reloadData() {
         super.reloadData()
         self.invalidateIntrinsicContentSize()
         self.layoutIfNeeded()
     }
 
-    override var intrinsicContentSize: CGSize {
+    open override var intrinsicContentSize: CGSize {
         setNeedsLayout()
         layoutIfNeeded()
         return CGSize(width: contentSize.width, height: contentSize.height)

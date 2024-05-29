@@ -12,6 +12,7 @@
 		7D2A1A3824FB55A600EEC4D2 /* ResourceSingleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceSingleton.swift; sourceTree = "<group>"; };
 		7D8362822423DBFE00B039E5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D8362992423E62200B039E5 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		7D997FC92BBDF7EA0005F19C /* PopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverView.swift; sourceTree = "<group>"; };
 		7DBC8BB424253941000B0CE6 /* FakeServerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeServerProtocol.swift; sourceTree = "<group>"; };
 		7DBC8BBB242569C3000B0CE6 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		7DF3E3512BA53FFA0058B5B6 /* CustomTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarController.swift; sourceTree = "<group>"; };
@@ -84,6 +85,7 @@
 				7DF3E3552BA541000058B5B6 /* Spacer.swift */,
 				7DF3E3562BA541100058B5B6 /* CircleView.swift */,
 				7DF3E3572BA541210058B5B6 /* TriangleView.swift */,
+				7D997FC92BBDF7EA0005F19C /* PopoverView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

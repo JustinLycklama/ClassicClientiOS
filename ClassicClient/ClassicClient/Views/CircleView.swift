@@ -8,16 +8,16 @@
 
 import UIKit
 
-class CircleView: UIView {
+open class CircleView: UIView {
 
     private let circle = UIView()
     
-    enum ScaleMode {
+    public enum ScaleMode {
         case aspectFit
         case aspectFill
     }
     
-    init(color: UIColor, scaleMode: ScaleMode = .aspectFit) {
+    public init(color: UIColor, scaleMode: ScaleMode = .aspectFit) {
         super.init(frame: .zero)
         
         backgroundColor = .clear
@@ -40,11 +40,11 @@ class CircleView: UIView {
         addConstraint(height)
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
+    open override func layoutSubviews() {
         super.layoutSubviews()
         
         circle.cornerRadius = min(circle.frame.size.width/2, circle.frame.size.height/2)

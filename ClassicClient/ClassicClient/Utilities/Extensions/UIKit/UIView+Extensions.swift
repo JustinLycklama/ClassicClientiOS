@@ -8,10 +8,22 @@
 
 import UIKit
 
+extension NSLayoutConstraint {
+    public class func activateIgnoreAutosize(_ constraints: [NSLayoutConstraint]) {
+        for constraint in constraints {
+            if let view = constraint.firstItem as? UIView {
+                view.translatesAutoresizingMaskIntoConstraints = false
+            }
+        }
+        
+        activate(constraints)
+    }
+}
+
 extension UIView {
     
     // Used when the view being wrapped has an intrinsic content size and does not need to be contrained on all edges
-    func wrappedInView(xAlignment: Alignment = .center, yAlignment: Alignment = .center) -> UIView {
+    public func wrappedInView(xAlignment: Alignment = .center, yAlignment: Alignment = .center) -> UIView {
         
         let container = UIView()
         container.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +55,7 @@ extension UIView {
         return container
     }
     
-    func constrainedInView(onEdges edges: [Edge] = .all,
+    public func constrainedInView(onEdges edges: [Edge] = .all,
                            withInsets insets: UIEdgeInsets = .zero,
                            ofSize size: CGSize? = nil) -> UIView {
         let container = UIView()
@@ -60,7 +72,7 @@ extension UIView {
         return container
     }
     
-    func wrapInScrollView() -> UIScrollView {
+    public func wrapInScrollView() -> UIScrollView {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
         
@@ -87,32 +99,33 @@ extension UIView {
                        onEdges edges: [Edge] = .all,
                        withInsets insets: UIEdgeInsets = .zero) -> [NSLayoutConstraint] {
         
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
         if !subviews.contains(view) {
             self.addSubview(view)
         }
         
-        var constrains: [NSLayoutConstraint] = []
-        
+        var constraints: [NSLayoutConstraint] = []
+                
         if edges.contains(.top) {
-            constrains.append(view.topAnchor.constraint(equalTo: self.topAnchor, constant: insets.top))
+            constraints.append(view.topAnchor.constraint(equalTo: self.topAnchor, constant: insets.top))
         }
         
         if edges.contains(.bottom) {
-            constrains.append(view.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -insets.bottom))
+            constraints.append(view.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -insets.bottom))
         }
         
         if edges.contains(.left) {
-            constrains.append(view.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: insets.left))
+            constraints.append(view.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: insets.left))
         }
         
         if edges.contains(.right) {
-            constrains.append(view.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -insets.right))
+            constraints.append(view.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -insets.right))
         }
         
-        view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate(constraints)
+        NSLayoutConstraint.activateIgnoreAutosize(constraints)
         
-        return constrains
+        return constraints
     }
     
     public func centerSubview(_ subview: UIView,
@@ -138,7 +151,7 @@ extension UIView {
             constraints += [width, height]
         }
         
-        NSLayoutConstraint.activate(constraints)
+        NSLayoutConstraint.activateIgnoreAutosize(constraints)
     }
     
     public func constrainViewSafeArea(_ view: UIView,
@@ -171,7 +184,7 @@ extension UIView {
             constraints.append(view.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -insets.right))
         }
         
-        NSLayoutConstraint.activate(constraints)
+        NSLayoutConstraint.activateIgnoreAutosize(constraints)
     }
     
     @discardableResult
