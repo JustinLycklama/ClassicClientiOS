@@ -11,6 +11,13 @@ import UIKit
 open class CircleView: UIView {
 
     private let circle = UIView()
+
+    public var color: UIColor {
+        didSet {
+            circle.backgroundColor = color
+        }
+    }
+    private var scaleMode: ScaleMode
     
     public enum ScaleMode {
         case aspectFit
@@ -18,8 +25,22 @@ open class CircleView: UIView {
     }
     
     public init(color: UIColor, scaleMode: ScaleMode = .aspectFit) {
+        self.scaleMode = scaleMode
+        self.color = color
         super.init(frame: .zero)
         
+        setupView()
+    }
+    
+    required public init?(coder: NSCoder) {
+        self.scaleMode = .aspectFit
+        self.color = .white
+        super.init(coder: coder)
+        
+        setupView()
+    }
+    
+    func setupView() {
         backgroundColor = .clear
         circle.backgroundColor = color
         
@@ -38,10 +59,6 @@ open class CircleView: UIView {
         
         addConstraint(width)
         addConstraint(height)
-    }
-    
-    required public init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     open override func layoutSubviews() {

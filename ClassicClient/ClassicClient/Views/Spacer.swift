@@ -8,13 +8,13 @@
 
 import UIKit
 
-class Spacer: UIView {
-    enum Dimension {
+open class Spacer: UIView {
+    public enum Dimension {
         case vertical(_ space: CGFloat)
         case horizontal(_ space: CGFloat)
     }
     
-    init(_ dimension: Dimension) {
+    public init(_ dimension: Dimension) {
         super.init(frame: .zero)
         
         switch dimension {
@@ -25,7 +25,7 @@ class Spacer: UIView {
         }
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

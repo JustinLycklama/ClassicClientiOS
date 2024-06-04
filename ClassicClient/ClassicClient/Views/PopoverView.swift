@@ -35,7 +35,7 @@ class PopoverView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
 
         roundCorners([.bottomLeft, .bottomRight, .topLeft], radius: 8)
-        borderColor = Style.textColorFaded
+        borderColor = .black
         borderWidth = 1
         
         constrainView(content, withInsets: UIEdgeInsets(10))
