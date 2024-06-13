@@ -17,7 +17,13 @@ open class CircleView: UIView {
             circle.backgroundColor = color
         }
     }
-    private var scaleMode: ScaleMode
+    
+    public var scaleMode: ScaleMode {
+        didSet {
+            scaleModeConstraint?.isActive = scaleMode == .aspectFit
+        }
+    }
+    private var scaleModeConstraint: NSLayoutConstraint?
     
     public enum ScaleMode {
         case aspectFit
@@ -53,10 +59,12 @@ open class CircleView: UIView {
         let height = circle.heightAnchor.constraint(equalTo: heightAnchor)
         height.priority = .defaultLow
         
-        if scaleMode == .aspectFit {
-            circle.addConstraint(circle.widthAnchor.constraint(equalTo: circle.heightAnchor))
-        }
+        let scaleConstraint = circle.widthAnchor.constraint(equalTo: circle.heightAnchor)
+        circle.addConstraint(scaleConstraint)
         
+        scaleConstraint.isActive = scaleMode == .aspectFit
+        scaleModeConstraint = scaleConstraint
+            
         addConstraint(width)
         addConstraint(height)
     }

@@ -32,7 +32,7 @@ extension UIColor {
         )
     }
     
-    convenience init(_ hex: String) {
+    public convenience init(_ hex: String) {
         self.init(cgColor: UIColor.hexStringToUIColor(hex: hex).cgColor)
     }
 }

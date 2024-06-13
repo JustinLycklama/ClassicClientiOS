@@ -218,7 +218,7 @@ extension UIView {
         set {
             if let newValue = newValue {
                 // Computed properties get stored as associated objects
-                objc_setAssociatedObject(self, &AssociatedObjectKeys.tapGestureRecognizer, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+                objc_setAssociatedObject(self, &AssociatedObjectKeys.tapGestureRecognizer, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             }
         }
         get {
@@ -238,17 +238,13 @@ extension UIView {
         return tapGestureRecognizer
     }
     
-    // Every time the user taps on the UIImageView, this function gets called,
+    // Every time the user taps on the UIView, this function gets called,
     // which triggers the closure we stored
     @objc fileprivate func handleTapGesture(sender: UITapGestureRecognizer) {
-        if let action = self.tapGestureRecognizerAction {
-            action?()
-        } else {
-            print("no action")
-        }
+        tapGestureRecognizerAction??()
     }
-    
 }
+
 
 // MARK: Round Corners
 

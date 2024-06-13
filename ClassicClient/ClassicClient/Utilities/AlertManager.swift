@@ -99,6 +99,13 @@ public class AlertManager {
     // MARK: Private
     
     private func rootViewController() -> UIViewController? {
+        
+        // For SceneDelegate
+        if let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow }) {
+            return window.rootViewController
+        }
+        
+        // For AppDelegate
         return UIApplication.shared.delegate?.window??.rootViewController
     }
     

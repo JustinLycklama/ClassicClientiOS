@@ -9,6 +9,8 @@
 import os
 import Foundation
 
+import os.log
+
 class AppLogger {
     static let shared = AppLogger()
     
@@ -47,5 +49,15 @@ class AppLogger {
                 print("[Logger - \(severity.rawValue.uppercased())] \(output)")
             }
         }
+    }
+    
+    let systemLogger = Logger(subsystem: "com.example.MyApp", category: "DeviceActivityMonitor")
+
+    
+    // To view these logs, open the 'Console' app on Mac and click the simulator or phone on the left hand side
+    // This is very useful for debugging app extensions or other things where a regular 'print' isn't visible.
+    private func systemLog(message: String) {
+        systemLogger.log("Notification scheduled with message: Realm path begin \(message, privacy: .public))")
+
     }
 }
