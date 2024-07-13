@@ -13,34 +13,34 @@ protocol CustomTabbarActionDelegate: AnyObject {
     func itemTapped(_ index: Int)
 }
 
-class CustomTabbarController: UITabBarController, CustomTabbarActionDelegate {
+open class CustomTabbarController: UITabBarController, CustomTabbarActionDelegate {
 
-    let customTabbar: CustomTabbar
+    public let customTabbar: CustomTabbar
     
-    override var viewControllers: [UIViewController]? {
+    open override var viewControllers: [UIViewController]? {
         didSet {
             customTabbar.setNumberOfTabs(viewControllers?.count ?? 0)
         }
     }
     
-    override var selectedIndex: Int {
+    open override var selectedIndex: Int {
         didSet {
             customTabbar.setIndex(selectedIndex)
         }
     }
     
-    init(tabbar: CustomTabbar) {
+    public init(tabbar: CustomTabbar) {
         self.customTabbar = tabbar
         super.init(nibName: nil, bundle: nil)
         
         customTabbar.actionDelegate = self
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
                 
         view.addSubview(customTabbar)

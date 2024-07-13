@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import Combine
 
-class HighlightedTabbar: CustomTabbar {
+open class HighlightedTabbar: CustomTabbar {
     
     private var subscriptions = Set<AnyCancellable>()
     
@@ -25,10 +25,22 @@ class HighlightedTabbar: CustomTabbar {
         return view
     }()
     
+    let separatorColor: UIColor
+    
+    public init(separatorColor: UIColor) {
+        self.separatorColor = separatorColor
+        
+        super.init(frame: .zero)
+    }
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func layoutView() {
         super.layoutView()
         
-        constrainView(Separator(.horizontal), onEdges: [.left, .top, .right])
+        constrainView(Separator(.horizontal, color: separatorColor), onEdges: [.left, .top, .right])
         
         let indicator = selectedTabIndicator
         var indicatorXConstraint: NSLayoutConstraint = indicator.centerXAnchor.constraint(equalTo: self.centerXAnchor)
@@ -60,11 +72,11 @@ class HighlightedTabbar: CustomTabbar {
     }
 }
 
-class CustomTabbar: UIView {
+open class CustomTabbar: UIView {
     
     weak var actionDelegate: CustomTabbarActionDelegate?
     
-    private(set) var items: [CustomTabItem] = [] {
+    private(set) public var items: [CustomTabItem] = [] {
         didSet {
             stack.arrangedSubviews.forEach({$0.removeFromSuperview()})
             items.forEach({stack.addArrangedSubview($0)})
@@ -86,7 +98,7 @@ class CustomTabbar: UIView {
         layoutView()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

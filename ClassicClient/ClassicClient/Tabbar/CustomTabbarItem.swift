@@ -8,14 +8,14 @@
 
 import UIKit
 
-class CustomTabItem: UIView {
+open class CustomTabItem: UIView {
     
-    var image: UIImage? {
+    public var image: UIImage? {
         didSet {
             imageView.image = image
         }
     }
-    var selectedImage: UIImage?
+    public var selectedImage: UIImage?
     
     let imageView = UIImageView().sized(.init(width: 20, height: 20))
     
@@ -25,7 +25,7 @@ class CustomTabItem: UIView {
         layoutView()
     }
     
-    required init?(coder: NSCoder) {
+    required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
